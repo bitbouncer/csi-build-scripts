@@ -14,23 +14,9 @@ cd raspberry
 
 svn checkout http://v8.googlecode.com/svn/trunk/ v8
 cd v8
-
 svn co https://src.chromium.org/chrome/trunk/deps/third_party/icu46 third_party/icu
 svn co http://gyp.googlecode.com/svn/trunk build/gyp
-build/gyp_v8
-
-export AR=arm-linux-gnueabihf-ar
-export CXX=arm-linux-gnueabihf-g++
-export CC=arm-linux-gnueabihf-gcc
-export LINK=arm-linux-gnueabihf-g++
-export CFLAGS='-O2 -march=armv6j -mfpu=vfp -mfloat-abi=hard'
-
-make armv7=false armfloatabi=hard arm
 cd ..
-
-
-mkdir -p ~/source/raspberrypi
-cd ~/source/raspberrypi
 
 git clone https://github.com/bitbouncer/csi-http
 git clone https://github.com/bitbouncer/json-spirit
@@ -122,8 +108,19 @@ cd bzip2-$BZLIB2_VERSION
 make 
 cd ..
 
+cd v8
+export AR=arm-linux-gnueabihf-ar
+export CXX=arm-linux-gnueabihf-g++
+export CC=arm-linux-gnueabihf-gcc
+export LINK=arm-linux-gnueabihf-g++
+export CFLAGS='-O2 -march=armv6j -mfpu=vfp -mfloat-abi=hard'
+make armv7=false armfloatabi=hard arm
+cd ..
+
 
 cd csi-http
 bash build_raspberrypi_ia32.sh
 cd ..
+
+
 
