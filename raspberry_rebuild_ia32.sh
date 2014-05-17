@@ -1,17 +1,3 @@
-sudo apt-get install cmake wget unzip cmake wget wput libpcre3 libpcre3-dev build-essential git subversion 
-
-mkdir -p ~/xtools
-cd ~/xtools
-
-git clone https://github.com/raspberrypi/tools.git --depth 1
-cd ..
-
-echo "export PATH=~/xtools/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:\$PATH" >> ~/.bashrc
-
-source ~/.bashrc
-
-
-
 export BOOST_VERSION=1_55_0
 export BOOST_VERSION_DOTTED=1.55.0
 export AVRO_VERSION=1.7.6
@@ -20,6 +6,8 @@ export ZLIB_VERSION=1.2.8
 export BZLIB2_VERSION=1.0.6
 export OPEN_SSL_VERSION=1.0.1g
 export JOYENT_HTTP_VERSION=2.3
+
+rm -rf raspberry
 
 mkdir raspberry
 cd raspberry
