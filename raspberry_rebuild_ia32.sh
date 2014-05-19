@@ -114,7 +114,7 @@ export CXX=arm-linux-gnueabihf-g++
 export CC=arm-linux-gnueabihf-gcc
 export LINK=arm-linux-gnueabihf-g++
 export CFLAGS='-O2 -march=armv6j -mfpu=vfp -mfloat-abi=hard'
-make armv7=false armfloatabi=hard arm
+make -j 4 armv7=false armfloatabi=hard arm
 cd ..
 
 
