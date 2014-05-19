@@ -77,8 +77,8 @@ rm -rf avro
 rm -rf build
 mkdir build
 cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberrypi.ia32.cmake ..
-make
+cmake -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
+make -j4
 cd ..
 mkdir avro
 cp -r api/*.* avro
@@ -88,12 +88,11 @@ cd json-spirit
 export BOOST_ROOT=$PWD/../boost_$BOOST_VERSION 
 export Boost_INCLUDE_DIR=$PWD/../boost_$BOOST_VERSION/boost
 export PI_TOOLS_HOME=~/xtools/tools
-rm -rf avro
 rm -rf build
 mkdir build
 cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=.../csi-build-scripts/toolchains/raspberrypi.ia32.cmake ..
-make
+cmake -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
+make -j4
 cd ..
 cd ..
 
@@ -120,8 +119,16 @@ cd ..
 
 
 cd csi-http
-bash build_raspberrypi_ia32.sh
+rm -rf build
+rm -rf lib
+mkdir build
+cd build
+cmake -D__CSI_HAS_OPENSSL__=1 -D__LINUX__=1 -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
+make -j4
 cd ..
+cd ..
+
+
 
 
 
