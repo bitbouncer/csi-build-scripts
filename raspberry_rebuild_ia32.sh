@@ -18,6 +18,7 @@ svn co https://src.chromium.org/chrome/trunk/deps/third_party/icu46 third_party/
 svn co http://gyp.googlecode.com/svn/trunk build/gyp
 cd ..
 
+git clone https://github.com/bitbouncer/csi-build-scripts
 git clone https://github.com/bitbouncer/csi-http
 git clone https://github.com/bitbouncer/json-spirit
 
@@ -76,7 +77,7 @@ rm -rf avro
 rm -rf build
 mkdir build
 cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=../csi-http/toolchains/raspberrypi.toolchain.ia32.cmake ..
+cmake -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberrypi.ia32.cmake ..
 make
 cd ..
 mkdir avro
@@ -91,7 +92,7 @@ rm -rf avro
 rm -rf build
 mkdir build
 cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=../csi-http/toolchains/raspberrypi.toolchain.ia32.cmake ..
+cmake -DCMAKE_TOOLCHAIN_FILE=.../csi-build-scripts/toolchains/raspberrypi.ia32.cmake ..
 make
 cd ..
 cd ..
