@@ -1,0 +1,166 @@
+SET(OPENSSLPATH				${CMAKE_SOURCE_DIR}/../openssl-1.0.1j)
+SET(ZLIB_PATH				${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
+SET(BOOST_PATH 		  		${CMAKE_SOURCE_DIR}/../boost_1_57_0)
+SET(BOOST_ENDIAN_PATH       ${CMAKE_SOURCE_DIR}/../endian)
+SET(LIBEVENTPATH	    	${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
+SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-client-asio)
+SET(AVROCPP_PATH 	        ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
+SET(CSI_HTTP_PATH           ${CMAKE_SOURCE_DIR}/../csi-http)
+SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
+SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
+SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.39.0)
+
+if(WIN32)
+SET(PTHREADPATH	    	    ${CMAKE_SOURCE_DIR}/../pthreads-w32-2-9-1-release)
+endif()
+
+include_directories(
+	${CMAKE_SOURCE_DIR} 
+	${BOOST_PATH} 
+	${BOOST_ENDIAN_PATH}/include 
+    ${AEROSPIKE_ASIO_PATH}
+    ${LIBEVENTPATH}/include
+    ${AVROCPP_PATH}
+    ${CSI_HTTP_PATH}
+    ${HTTP_PARSER_PATH}
+	${JSON_SPIRIT_PATH}
+    ${LIBCURL_PATH}/include
+)
+
+include_directories(
+    ${CMAKE_SOURCE_DIR}
+	${BOOST_PATH} 
+	${BOOST_ENDIAN_PATH}/include 
+    ${LIBEVENTPATH}/include
+    ${PTHREADPATH}
+	${ZLIB_PATH}    
+)
+
+
+
+if(WIN32)
+include_directories(
+    ${OPENSSLPATH}/inc32
+    ${LIBEVENTPATH}/WIN32-Code
+)
+
+link_directories(
+    ${CMAKE_SOURCE_DIR}/lib/$(Platform)
+    ${OPENSSLPATH}/out32
+    ${BOOST_PATH}/lib/$(Platform)/lib
+    ${AVROCPP_PATH}/build64/$(Configuration)
+    ${LIBCURL_PATH}/libs/$(Platform)/$(Configuration)
+    ${LIBEVENTPATH}
+    ${PTHREADPATH}
+    ${JSON_SPIRIT_PATH}/lib/$(Platform)/$(Configuration)
+    ${CSI_HTTP_PATH}/lib/$(Platform)/$(Configuration)
+    ${AEROSPIKE_ASIO_PATH}/lib/$(Platform)    
+)
+
+add_definitions(-DCURL_STATICLIB)
+ADD_LIBRARY(ZLIB STATIC IMPORTED)
+SET_TARGET_PROPERTIES(ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_PATH}/lib/zdll.lib)
+
+SET(LIBRARY_OUTPUT_PATH     ${CMAKE_SOURCE_DIR}/lib/$(Platform))
+SET(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/bin/$(Platform))
+endif() #WIN32
+
+
+if(__LINUX__)
+include_directories(${OPENSSLPATH}/include)
+
+link_directories(
+    ${CMAKE_SOURCE_DIR}/lib
+    ${BOOST_PATH}/stage/lib
+    ${OPENSSLPATH}
+    ${AEROSPIKE_ASIO_PATH}/lib
+    ${AVROCPP_PATH}/lib
+    ${CSIHTTP_PATH}/lib
+    ${JSON_SPIRIT_PATH}/lib
+)
+
+if (USE_BUILTIN_CURL)
+SET(LIBCURL curl)
+else()
+ADD_LIBRARY(LIBCURL STATIC IMPORTED)
+SET_TARGET_PROPERTIES(LIBCURL PROPERTIES IMPORTED_LOCATION ${LIBCURL_PATH}/lib/.libs/libcurl.a)
+add_definitions(-DCURL_STATICLIB)
+SET(LIBCURL LIBCURL)
+endif()
+
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
+SET(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/bin)
+
+endif() #LINUX
+
+
+if(__DARWIN__)
+include_directories(/opt/X11/include)
+
+SET(LIBRARY_OUTPUT_PATH     ${CMAKE_SOURCE_DIR}/lib)
+SET(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/bin)
+
+ADD_LIBRARY(LIBCURL STATIC IMPORTED)
+SET_TARGET_PROPERTIES(LIBCURL PROPERTIES IMPORTED_LOCATION ${LIBCURL_PATH}/lib/.libs/libcurl.a)
+add_definitions(-DCURL_STATICLIB)
+
+link_directories(
+    ${CMAKE_SOURCE_DIR}/lib
+    ${BOOST_PATH}/stage/lib
+    ${OPENSSLPATH}
+    ${AEROSPIKE_ASIO_PATH}/lib
+    ${AVROCPP_PATH}/lib
+    ${CSIHTTP_PATH}/lib
+    ${JSON_SPIRIT_PATH}/lib
+    )
+endif() #END DARWIN
+
+#END DEPENDENCIES
+
+
+
+#COMMON DEFINITIONS
+add_definitions(-D_FILE_OFFSET_BITS=64 -D_REENTRANT -DEXTERNAL_LOCKS -DMULTITHREAD)
+add_definitions(-DBOOST_ASIO_HAS_STD_CHRONO)
+
+
+if(WIN32)
+add_definitions(-DMARCH_x86_64) 
+#needed for win32 where autotools has not been run
+add_definitions(-DVERSION="csi-internal")
+#min windows 7
+add_definitions(-D_WIN32_WINNT=0x0602) # win8.1 to get nthll 64 bit
+add_definitions(-DWINVER=0x0601)
+add_definitions(-DCF_WINDOWS)
+add_definitions(/MP)
+add_definitions(/bigobj)
+add_definitions(-D_UNICODE)
+add_definitions(-DUNICODE)
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+add_definitions(-D_SCL_SECURE_NO_WARNINGS)
+add_definitions(-DSECURITY_WIN32)
+add_definitions(/wd4996) #'strdup': The POSIX name for this item is deprecated
+add_definitions(/wd4197) # 'cf_atomic32' : top-level volatile in cast is ignored
+add_definitions(/wd4200) #nonstandard extension used : zero-sized array in struct/union 
+
+endif()
+
+
+if(__LINUX__)
+add_definitions(-D__LINUX__)
+add_definitions(-fPIC)
+add_definitions(-std=c++11)
+add_definitions(-DBOOST_LOG_DYN_LINK)
+add_definitions(-DBOOST_LOG_USE_NATIVE_SYSLOG)
+add_definitions(-Wno-deprecated)
+endif()
+
+
+if(__DARWIN__)
+add_definitions(-D__DARWIN__)
+add_definitions(-fPIC)
+add_definitions(-std=c++11)
+add_definitions(-DBOOST_LOG_DYN_LINK)
+endif()
+
+
