@@ -72,7 +72,7 @@ include_directories(${OPENSSLPATH}/include)
 link_directories(
     ${CMAKE_SOURCE_DIR}/lib
     ${BOOST_PATH}/stage/lib
-    ${LIBCURL_PATH}/libs/.libs
+    ${LIBCURL_PATH}/lib/.libs
     ${OPENSSLPATH}
     ${AVROCPP_PATH}/build
     ${CSI_HTTP_PATH}/lib
