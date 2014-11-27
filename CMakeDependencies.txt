@@ -75,7 +75,7 @@ link_directories(
     ${OPENSSLPATH}
     ${AEROSPIKE_ASIO_PATH}/lib
     ${AVROCPP_PATH}/lib
-    ${CSIHTTP_PATH}/lib
+    ${CSI_HTTP_PATH}/lib
     ${JSON_SPIRIT_PATH}/lib
 )
 
