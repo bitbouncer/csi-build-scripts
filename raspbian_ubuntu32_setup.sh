@@ -1,16 +1,11 @@
-export BOOST_VERSION=1_55_0
-export BOOST_VERSION_DOTTED=1.55.0
+export BOOST_VERSION=1_57_0
+export BOOST_VERSION_DOTTED=1.57.0
 export AVRO_VERSION=1.7.7
-export CURL_VERSION=7.35.0
+export CURL_VERSION=7.39.0
 export ZLIB_VERSION=1.2.8
 export BZLIB2_VERSION=1.0.6
-export OPEN_SSL_VERSION=1.0.1g
+export OPEN_SSL_VERSION=1.0.1j
 export JOYENT_HTTP_VERSION=2.3
-
-rm -rf raspberry
-
-mkdir raspberry
-cd raspberry
 
 svn checkout http://v8.googlecode.com/svn/trunk/ v8
 cd v8
@@ -26,7 +21,7 @@ wget http://curl.haxx.se/download/curl-$CURL_VERSION.tar.bz2 -Ocurl-$CURL_VERSIO
 tar xvf curl-$CURL_VERSION.tar.bz2
 
 wget http://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_DOTTED/boost_$BOOST_VERSION.tar.gz/download -Oboost_$BOOST_VERSION.tar.gz
-tar xvf boost_$BOOST_VERSION.tar.gz
+tar xf boost_$BOOST_VERSION.tar.gz
 
 wget http://zlib.net/zlib-$ZLIB_VERSION.tar.gz
 tar xvf zlib-$ZLIB_VERSION.tar.gz
@@ -35,15 +30,13 @@ wget http://www.bzip.org/$BZLIB2_VERSION/bzip2-$BZLIB2_VERSION.tar.gz
 tar xvf bzip2-$BZLIB2_VERSION.tar.gz
 
 wget  http://www.openssl.org/source/openssl-$OPEN_SSL_VERSION.tar.gz -Oopenssl-$OPEN_SSL_VERSION.tar.gz
-gzip -d openssl-$OPEN_SSL_VERSION.tar.gz
-tar -xvf openssl-$OPEN_SSL_VERSION.tar
+tar xvf openssl-$OPEN_SSL_VERSION.tar.gz
 
 wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-$AVRO_VERSION/cpp/avro-cpp-$AVRO_VERSION.tar.gz
 tar xvf avro-cpp-$AVRO_VERSION.tar.gz
 
 wget https://github.com/joyent/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser-v$JOYENT_HTTP_VERSION.tar.gz
-gzip -d http_parser-v$JOYENT_HTTP_VERSION.tar.gz
-tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar
+tar xvf http_parser-v$JOYENT_HTTP_VERSION.tar
 
 cd boost_$BOOST_VERSION
 echo "using gcc : arm : arm-linux-gnueabihf-g++ ;" >> tools/build/v2/user-config.jam
