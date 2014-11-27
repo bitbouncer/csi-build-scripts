@@ -72,11 +72,12 @@ include_directories(${OPENSSLPATH}/include)
 link_directories(
     ${CMAKE_SOURCE_DIR}/lib
     ${BOOST_PATH}/stage/lib
+    ${LIBCURL_PATH}/libs/.libs
     ${OPENSSLPATH}
-    ${AEROSPIKE_ASIO_PATH}/lib
-    ${AVROCPP_PATH}/lib
+    ${AVROCPP_PATH}/build
     ${CSI_HTTP_PATH}/lib
     ${JSON_SPIRIT_PATH}/lib
+    ${AEROSPIKE_ASIO_PATH}/lib    
 )
 
 if (USE_BUILTIN_CURL)

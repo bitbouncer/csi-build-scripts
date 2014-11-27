@@ -1,4 +1,4 @@
-sudo apt-get install cmake wget unzip cmake wget wput libpcre3 libpcre3-dev build-essential git subversion 
+sudo apt-get -y install cmake wget unzip cmake wget wput libpcre3 libpcre3-dev build-essential git subversion 
 
 mkdir -p ~/xtools
 cd ~/xtools

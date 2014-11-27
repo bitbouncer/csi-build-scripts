@@ -7,39 +7,47 @@ export BZLIB2_VERSION=1.0.6
 export OPEN_SSL_VERSION=1.0.1j
 export JOYENT_HTTP_VERSION=2.3
 
-svn checkout http://v8.googlecode.com/svn/trunk/ v8
-cd v8
-svn co https://src.chromium.org/chrome/trunk/deps/third_party/icu46 third_party/icu
-svn co http://gyp.googlecode.com/svn/trunk build/gyp
-cd ..
+#svn checkout http://v8.googlecode.com/svn/trunk/ v8
+#cd v8
+#svn co https://src.chromium.org/chrome/trunk/deps/third_party/icu46 third_party/icu
+#svn co http://gyp.googlecode.com/svn/trunk build/gyp
+#cd ..
 
-git clone https://github.com/bitbouncer/csi-build-scripts
 git clone https://github.com/bitbouncer/csi-http
 git clone https://github.com/bitbouncer/json-spirit
 
 wget http://curl.haxx.se/download/curl-$CURL_VERSION.tar.bz2 -Ocurl-$CURL_VERSION.tar.bz2
 tar xvf curl-$CURL_VERSION.tar.bz2
+rm  curl-$CURL_VERSION.tar.bz2
 
 wget http://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_DOTTED/boost_$BOOST_VERSION.tar.gz/download -Oboost_$BOOST_VERSION.tar.gz
 tar xf boost_$BOOST_VERSION.tar.gz
+rm boost_$BOOST_VERSION.tar.gz
 
 wget http://zlib.net/zlib-$ZLIB_VERSION.tar.gz
 tar xvf zlib-$ZLIB_VERSION.tar.gz
+rm zlib-$ZLIB_VERSION.tar.gz
 
 wget http://www.bzip.org/$BZLIB2_VERSION/bzip2-$BZLIB2_VERSION.tar.gz
 tar xvf bzip2-$BZLIB2_VERSION.tar.gz
+rm bzip2-$BZLIB2_VERSION.tar.gz
 
 wget  http://www.openssl.org/source/openssl-$OPEN_SSL_VERSION.tar.gz -Oopenssl-$OPEN_SSL_VERSION.tar.gz
 tar xvf openssl-$OPEN_SSL_VERSION.tar.gz
+rm openssl-$OPEN_SSL_VERSION.tar.gz
 
 wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-$AVRO_VERSION/cpp/avro-cpp-$AVRO_VERSION.tar.gz
 tar xvf avro-cpp-$AVRO_VERSION.tar.gz
+rm avro-cpp-$AVRO_VERSION.tar.gz
 
 wget https://github.com/joyent/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser-v$JOYENT_HTTP_VERSION.tar.gz
-tar xvf http_parser-v$JOYENT_HTTP_VERSION.tar
+tar xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
+rm http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 
 cd boost_$BOOST_VERSION
-echo "using gcc : arm : arm-linux-gnueabihf-g++ ;" >> tools/build/v2/user-config.jam
+#echo "using gcc : arm : arm-linux-gnueabihf-g++ ;" >> tools/build/v2/user-config.jam move <=1.55
+#echo "using gcc : arm : arm-linux-gnueabihf-g++ ;" >> tools/build/user-config.jam should work >=1.56 - but I had to use home dir for now
+echo "using gcc : arm : arm-linux-gnueabihf-g++ ;" >> ~/user-config.jam
 ./bootstrap.sh
 ./b2 -j 5 -s ZLIB_SOURCE=$PWD/../zlib-$ZLIB_VERSION  -s BZIP2_SOURCE=$PWD/../bzip2-$BZLIB2_VERSION toolset=gcc-arm
 cd ..
@@ -89,26 +97,25 @@ make -j4
 cd ..
 cd ..
 
-#zlib & bzip2 needs to be there for boost iostreams to compile but since were not using it at the moment - skip this
+#zlib & bzip2 needs to be there for boost iostreams to compile but since were not using it at the moment - clould be skipped
 
 cd zlib-$ZLIB_VERSION
 ./configure --static
+make
 cd ..
 
-
-# not sure that the below lines actually builds arm version...
 cd bzip2-$BZLIB2_VERSION
-make 
+make CC=$CC AR=arm-linux-gnueabihf-ar
 cd ..
 
-cd v8
-export AR=arm-linux-gnueabihf-ar
-export CXX=arm-linux-gnueabihf-g++
-export CC=arm-linux-gnueabihf-gcc
-export LINK=arm-linux-gnueabihf-g++
-export CFLAGS='-O2 -march=armv6j -mfpu=vfp -mfloat-abi=hard'
-make -j 4 armv7=false armfloatabi=hard arm
-cd ..
+#cd v8
+#export AR=arm-linux-gnueabihf-ar
+#export CXX=arm-linux-gnueabihf-g++
+#export CC=arm-linux-gnueabihf-gcc
+#export LINK=arm-linux-gnueabihf-g++
+#export CFLAGS='-O2 -march=armv6j -mfpu=vfp -mfloat-abi=hard'
+#make -j 4 armv7=false armfloatabi=hard arm
+#cd ..
 
 
 cd csi-http
