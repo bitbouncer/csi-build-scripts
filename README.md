@@ -4,20 +4,16 @@ Common buildscripts for bitbouncer repos download and build all required libs
 The purpose is to have a common build system make it trivial to use Visual Studio for C++11 development and still have the alternative to deploy on linux
 
 Downloads and builds (where needed)
-Boost              1.57
-OpenSSL            1.0.1j
-libcurl            7.0.39
-zlib               1.2.8
-avro_cpp           1.7.7
-libevent           2.0.21
-pthread            2.9.1
-joyent_http_parser 2.3
+  * Boost              1.57
+  * OpenSSL            1.0.1j
+  * libcurl            7.0.39
+  * zlib               1.2.8
+  * avro_cpp           1.7.7
+  * libevent           2.0.21
+  * pthread            2.9.1
+  * joyent_http_parser 2.3
 
-more comming....
-
-Ubuntu 14 x64:
-Windows 64 Visual Studio 12
-Raspberry (Raspbian) crosscompile under Ubuntu 14 x32
+## Ubuntu 14 x64:
 
 Install build tools
 ```
@@ -34,7 +30,7 @@ git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/ubuntu14_setup.sh
 ```
 
-Raspberry Pi - cross compiling on ubuntu14 x32
+## Raspberry Pi - cross compiling on ubuntu14 x32
 
 Install build tools
 ```
@@ -57,11 +53,11 @@ git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/raspbian_ubuntu32_setup.sh
 ```
 
-Windows x64 - Visual Studio 12
+## Windows x64 - Visual Studio 12
 
 Get and build nessessary dependencies
 ```
-Install Visual Studio, nasm, git and active perl, make sure active perl is before git in PATH
+Install Visual Studio, cmake, nasm, git and active perl manually, make sure active perl is before git in PATH
 
 mkdir source
 cd source
