@@ -16,6 +16,13 @@ export JOYENT_HTTP_VERSION=2.3
 git clone https://github.com/bitbouncer/csi-http
 git clone https://github.com/bitbouncer/json-spirit
 
+#until boost 1.57 when this was supposed to be included
+git clone https://github.com/boostorg/endian.git
+#back two thing out of trunk to compile under boost < 1.57
+sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/types.hpp
+sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/conversion.hpp
+
+
 wget http://curl.haxx.se/download/curl-$CURL_VERSION.tar.bz2 -Ocurl-$CURL_VERSION.tar.bz2
 tar xvf curl-$CURL_VERSION.tar.bz2
 rm  curl-$CURL_VERSION.tar.bz2
@@ -86,13 +93,13 @@ cp -r api/*.* avro
 cd ..
 
 cd json-spirit
-export BOOST_ROOT=$PWD/../boost_$BOOST_VERSION 
-export Boost_INCLUDE_DIR=$PWD/../boost_$BOOST_VERSION/boost
+#export BOOST_ROOT=$PWD/../boost_$BOOST_VERSION 
+#export Boost_INCLUDE_DIR=$PWD/../boost_$BOOST_VERSION/boost
 export PI_TOOLS_HOME=~/xtools/tools
 rm -rf build
 mkdir build
 cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
+cmake -D__LINUX__=1 -DCMAKE_TOOLCHAIN_FILE=../csi-build-scripts/toolchains/raspberry.ia32.cmake ..
 make -j4
 cd ..
 cd ..
