@@ -17,6 +17,7 @@ call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\v
 
 wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-%AVRO_VERSION%/cpp/avro-cpp-%AVRO_VERSION%.tar.gz
 tar xvf avro-cpp-%AVRO_VERSION%.tar.gz
+del xvf avro-cpp-%AVRO_VERSION%.tar.gz
 
 wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz
 tar xvf zlib-%ZLIB_VERSION%.tar.gz
@@ -54,7 +55,7 @@ tar xvf pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
 
 @ECHO BUILDING OPEN_SSL
 cd %OPEN_SSL_VERSION%
-perl Configure VC-WIN64A --prefix=/OpenSSL-Win64
+call perl Configure VC-WIN64A --prefix=/OpenSSL-Win64
 ms\do_win64a
 nmake -f ms\nt.mak
 cd ..
