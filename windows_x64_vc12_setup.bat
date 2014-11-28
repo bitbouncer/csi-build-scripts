@@ -150,11 +150,27 @@ cp -r api/*.* avro
 cd ..
 
 cd json-spirit
-call rebuild_win64_vc12.bat
+rmdir /S /Q bin\x64
+rmdir /S /Q lib\x64
+rmdir /S /Q win_build64
+mkdir win_build64 
+cd win_build64
+cmake -G "Visual Studio 12 Win64" ..
+msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+cd ..
 cd ..
 
 cd csi-http
-call rebuild_win64_vc12.bat
+rmdir /S /Q bin\x64
+rmdir /S /Q lib\x64
+rmdir /S /Q win_build64
+mkdir win_build64 
+cd win_build64
+cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 12 Win64" ..
+msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+cd ..
 cd ..
 
 
