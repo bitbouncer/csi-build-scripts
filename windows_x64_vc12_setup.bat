@@ -149,26 +149,13 @@ mkdir avro
 cp -r api/*.* avro
 cd ..
 
-@ECHO BUILDING JSON-SPIRIT
 cd json-spirit
-rmdir /S /Q bin
-rmdir /S /Q lib
-rmdir /S /Q win_build32
-rmdir /S /Q win_build64
-set BOOST_ROOT=%CD%\..\boost_1_57_0
-mkdir win_build64 
-cd win_build64
-cmake -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+call rebuild_win64_vc12.bat
 cd ..
-cd ..
-
 
 cd csi-http
-call build_windows.bat
+call rebuild_win64_vc12.bat
 cd ..
-
 
 
 
