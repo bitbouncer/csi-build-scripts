@@ -17,10 +17,8 @@ sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endi
 
 
 git clone https://github.com/bitbouncer/csi-http.git
-
+git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
-
-
 
 #build stuff
 cd avro-cpp-$AVRO_VERSION
@@ -48,5 +46,14 @@ cmake -D__CSI_HAS_OPENSSL__=1  -D__LINUX__=1 ..
 make -j4
 cd ..
 cd ..
+
+cd csi-kafka
+mkdir build
+cd build
+cmake -D__LINUX__=1 ..
+make -j4
+cd ..
+cd ..
+
 
 

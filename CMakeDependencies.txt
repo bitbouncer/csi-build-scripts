@@ -6,6 +6,7 @@ SET(LIBEVENTPATH	    	${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
 SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-client-asio)
 SET(AVROCPP_PATH 	        ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
 SET(CSI_HTTP_PATH           ${CMAKE_SOURCE_DIR}/../csi-http)
+SET(CSI_KAFKA_PATH          ${CMAKE_SOURCE_DIR}/../csi-kafka)
 SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
 SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
 SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.39.0)
@@ -22,21 +23,13 @@ include_directories(
     ${LIBEVENTPATH}/include
     ${AVROCPP_PATH}
     ${CSI_HTTP_PATH}
+    ${CSI_KAFKA_PATH}
     ${HTTP_PARSER_PATH}
 	${JSON_SPIRIT_PATH}
     ${LIBCURL_PATH}/include
-)
-
-include_directories(
-    ${CMAKE_SOURCE_DIR}
-	${BOOST_PATH} 
-	${BOOST_ENDIAN_PATH}/include 
-    ${LIBEVENTPATH}/include
     ${PTHREADPATH}
 	${ZLIB_PATH}    
 )
-
-
 
 if(WIN32)
 include_directories(
@@ -54,6 +47,7 @@ link_directories(
     ${PTHREADPATH}
     ${JSON_SPIRIT_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_HTTP_PATH}/lib/$(Platform)/$(Configuration)
+    ${CSI_KAFKA_PATH}/lib/$(Platform)/$(Configuration)
     ${AEROSPIKE_ASIO_PATH}/lib/$(Platform)    
 )
 
@@ -76,6 +70,7 @@ link_directories(
     ${OPENSSLPATH}
     ${AVROCPP_PATH}/build
     ${CSI_HTTP_PATH}/lib
+    ${CSI_KAFKA_PATH}/lib
     ${JSON_SPIRIT_PATH}/lib
     ${AEROSPIKE_ASIO_PATH}/lib    
 )
@@ -111,7 +106,8 @@ link_directories(
     ${OPENSSLPATH}
     ${AEROSPIKE_ASIO_PATH}/lib
     ${AVROCPP_PATH}/lib
-    ${CSIHTTP_PATH}/lib
+    ${CSI_HTTP_PATH}/lib
+    ${CSI_KAFKA_PATH}/lib
     ${JSON_SPIRIT_PATH}/lib
     )
 endif() #END DARWIN

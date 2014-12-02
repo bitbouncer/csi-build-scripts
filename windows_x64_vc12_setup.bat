@@ -36,6 +36,7 @@ sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endi
 
 git clone https://github.com/bitbouncer/csi-build-scripts.git
 git clone https://github.com/bitbouncer/csi-http.git
+git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 wget --no-check-certificate https://github.com/joyent/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar -xvf http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
@@ -173,6 +174,17 @@ msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
 cd ..
 
+cd csi-kafka
+rmdir /S /Q bin\x64
+rmdir /S /Q lib\x64
+rmdir /S /Q win_build64
+mkdir win_build64 
+cd win_build64
+cmake  -G "Visual Studio 12 Win64" ..
+msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+cd ..
+cd ..
 
 
 
