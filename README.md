@@ -49,7 +49,7 @@ sudo ls
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/ubuntu14_setup.sh
+bash csi-build-scripts/ubuntu12_setup.sh
 ```
 
 ## Raspberry Pi - cross compiling on ubuntu14 x32
