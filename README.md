@@ -29,6 +29,25 @@ cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/ubuntu14_setup.sh
 ```
+## Ubuntu 12 x64:
+
+Install build tools
+```
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libboost-all-dev
+sudo apt-get install gcc-4.8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
+```
+
+Get and build nessessary dependencies
+```
+sudo ls
+mkdir source
+cd source
+git clone https://github.com/bitbouncer/csi-build-scripts.git
+bash csi-build-scripts/ubuntu14_setup.sh
+```
 
 ## Raspberry Pi - cross compiling on ubuntu14 x32
 
