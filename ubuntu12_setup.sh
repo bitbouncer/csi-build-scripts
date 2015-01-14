@@ -28,7 +28,7 @@ git clone https://github.com/bitbouncer/json-spirit
 
 cd boost_$BOOST_VERSION
 ./bootstrap.sh
-./b2 -j 5 -s
+./b2 -j 5 
 cd ..
 
 #build stuff
