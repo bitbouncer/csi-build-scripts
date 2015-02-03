@@ -9,11 +9,12 @@ wget --no-check-certificate  https://github.com/joyent/http-parser/archive/v$JOY
 tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 rm http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 
-#until boost 1.57 when this was supposed to be included
+#until boost 1.58? when this is supposed to be included
 git clone https://github.com/boostorg/endian.git
-#back two thing out of trunk to compile under boost < 1.57
+#back some things out of trunk to compile under boost < 1.57
 sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/arithmetic.hpp
 sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/conversion.hpp
+sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:" endian/include/boost/endian/conversion.hpp
 
 
 git clone https://github.com/bitbouncer/csi-http.git
