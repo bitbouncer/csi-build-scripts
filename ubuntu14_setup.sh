@@ -11,7 +11,7 @@ rm http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 
 #until boost 1.58? when this is supposed to be included
 git clone https://github.com/boostorg/endian.git
-#back some things out of trunk to compile under boost < 1.57
+#back some things out of trunk to compile under boost 1.54 
 sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/arithmetic.hpp
 sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/conversion.hpp
 sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/buffers.hpp
