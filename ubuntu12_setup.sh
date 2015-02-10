@@ -21,6 +21,7 @@ wget http://sourceforge.net/projects/boost/files/boost/$BOOST_VERSION_DOTTED/boo
 tar xf boost_$BOOST_VERSION.tar.gz
 rm boost_$BOOST_VERSION.tar.gz
 
+git clone https://github.com/google/snappy.git
 
 git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
@@ -32,6 +33,12 @@ cd boost_$BOOST_VERSION
 cd ..
 
 #build stuff
+cd snappy
+./autogen.sh
+./configure
+make all
+cd ..
+
 cd avro-cpp-$AVRO_VERSION
 mkdir build
 cd build

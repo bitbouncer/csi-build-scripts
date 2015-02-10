@@ -20,12 +20,21 @@ sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:
 sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:" endian/include/boost/endian/conversion.hpp
 sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:" endian/include/boost/endian/buffers.hpp
 
+git clone https://github.com/google/snappy.git
 
 git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
+
+
 #build stuff
+cd snappy
+./autogen.sh
+./configure
+make all
+cd ..
+
 cd avro-cpp-$AVRO_VERSION
 mkdir build
 cd build
