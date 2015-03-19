@@ -13,6 +13,7 @@ Downloads and builds (where needed)
   * pthread            2.9.1
   * joyent_http_parser 2.3
   * snappy (master)
+  * boost_endian (master)
 
 ## Ubuntu 14 x64:
 
