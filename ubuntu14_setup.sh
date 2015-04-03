@@ -22,6 +22,7 @@ sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:
 
 git clone https://github.com/google/snappy.git
 
+git clone https://github.com/bitbouncer/csi-avro-cpp.git
 git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
@@ -41,6 +42,14 @@ cd build
 cmake ..
 make -j4
 sudo make install
+cd ..
+cd ..
+
+cd csi-avro-cpp
+mkdir build
+cd build
+cmake -D__CSI_HAS_OPENSSL__=1  -D__LINUX__=1 ..
+make -j4
 cd ..
 cd ..
 

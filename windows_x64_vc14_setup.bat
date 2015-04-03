@@ -1,8 +1,8 @@
 REM need separate installation of git, nasm, active perl & visual studio
 REM make sure that active perl is before any other perl - git's for example in PATH
 
-set VISUALSTUDIO_VERSION=12.0
-set VISUALSTUDIO_VERSION_MAJOR=12
+set VISUALSTUDIO_VERSION=14.0
+set VISUALSTUDIO_VERSION_MAJOR=14
 set BOOST_VERSION=1_57_0
 set BOOST_VERSION_DOTTED=1.57.0
 set OPEN_SSL_VERSION=openssl-1.0.1j
@@ -25,7 +25,6 @@ del boost_%BOOST_VERSION%.tar.gz
 
 
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-git clone https://github.com/bitbouncer/csi-avro-cpp.git
 git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 
@@ -142,24 +141,12 @@ rmdir /s /q avro
 rmdir /s /q build64
 mkdir build64
 cd build64
-cmake -G "Visual Studio 12 Win64" ..
+cmake -G "Visual Studio 14 2015 Win64" ..
 msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
 msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
 mkdir avro
 cp -r api/*.* avro
-cd ..
-
-cd csi-avro-cpp
-rmdir /S /Q bin\x64
-rmdir /S /Q lib\x64
-rmdir /S /Q win_build64
-mkdir win_build64 
-cd win_build64
-cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 12 Win64" ..
-msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
-msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
-cd ..
 cd ..
 
 cd json-spirit
@@ -168,7 +155,7 @@ rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
 mkdir win_build64 
 cd win_build64
-cmake -G "Visual Studio 12 Win64" ..
+cmake -G "Visual Studio 14 2015 Win64" ..
 msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
 msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
@@ -180,7 +167,7 @@ rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
 mkdir win_build64 
 cd win_build64
-cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 12 Win64" ..
+cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 14 2015 Win64" ..
 msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
 msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
@@ -192,7 +179,7 @@ rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
 mkdir win_build64 
 cd win_build64
-cmake  -G "Visual Studio 12 Win64" ..
+cmake  -G "Visual Studio 14 2015 Win64" ..
 msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
 msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
