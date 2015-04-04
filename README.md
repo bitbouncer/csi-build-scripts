@@ -1,7 +1,8 @@
 csi-build-scripts
 =================
-Common buildscripts for bitbouncer repos download and build all required libs
-The purpose is to have a common build system make it trivial to use Visual Studio for C++11 development and still have the alternative to deploy on linux
+Common buildscripts for bitbouncer repos. 
+
+Downloads and build all required libs. The purpose is to have a common build system to make it trivial to use Visual Studio for during development and still easily deploy on Linux
 
 Downloads and builds (where needed)
   * Boost              1.57
