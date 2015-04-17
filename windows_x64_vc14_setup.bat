@@ -84,8 +84,8 @@ mkdir libs\win32\Release
 
 cd winbuild
 SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\%OPEN_SSL_VERSION%\include\openssl
-nmake /f makefile.vc mode=static VC=12 WITH_SSL=no ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
-nmake /f makefile.vc mode=static VC=12 WITH_SSL=no ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
+nmake /f makefile.vc mode=static VC=12 WITH_SSL=yes ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
+nmake /f makefile.vc mode=static VC=12 WITH_SSL=yes ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
 cd ..
 
 copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
