@@ -84,8 +84,8 @@ mkdir libs\win32\Release
 cd winbuild
 SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\%OPEN_SSL_VERSION%\include\openssl
 SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32
-nmake /f makefile.vc mode=static VC=12 WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
-nmake /f makefile.vc mode=static VC=12 WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
+nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
+nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
 cd ..
 
 #non ssl builds
