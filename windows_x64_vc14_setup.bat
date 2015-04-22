@@ -23,14 +23,10 @@ wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/bo
 tar xf boost_%BOOST_VERSION%.tar.gz
 del boost_%BOOST_VERSION%.tar.gz
 
-
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-git clone https://github.com/bitbouncer/csi-http.git
-git clone https://github.com/bitbouncer/csi-kafka.git
-
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 tar xvf curl-%CURL_VERSION%.tar.gz
 del curl-%CURL_VERSION%.tar.gz
+
 
 #until boost 1.57 when this was supposed to be included
 git clone https://github.com/boostorg/endian.git
@@ -38,7 +34,6 @@ git clone https://github.com/boostorg/endian.git
 #sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/types.hpp
 #sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/conversion.hpp
 
-git clone https://github.com/bitbouncer/json-spirit
 wget --no-check-certificate https://github.com/joyent/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar -xvf http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 del http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
@@ -60,12 +55,21 @@ tar xvf zlib-%ZLIB_VERSION%.tar.gz
 del zlib-%ZLIB_VERSION%.tar.gz
 
 
+git clone https://github.com/google/snappy.git
+git clone https://github.com/bitbouncer/csi-avro-cpp.git
+git clone https://github.com/bitbouncer/csi-http.git
+git clone https://github.com/bitbouncer/csi-kafka.git
+git clone https://github.com/bitbouncer/json-spirit
+
 @ECHO BUILDING OPEN_SSL
 cd %OPEN_SSL_VERSION%
 start /WAIT perl Configure VC-WIN64A --prefix=/OpenSSL-Win64
 call ms\do_win64a
 nmake -f ms\nt.mak
 cd ..
+
+
+
 
 
 @ECHO BUILDING LIBCURL
