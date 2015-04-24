@@ -38,6 +38,16 @@ cd snappy
 make all
 cd ..
 
+cd sqlpp11-v$SQLPP11_VERSION
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+cd ..
+cd ..
+
+
 cd avro-cpp-$AVRO_VERSION
 mkdir build
 cd build
