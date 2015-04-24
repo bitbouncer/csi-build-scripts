@@ -1,5 +1,6 @@
 export AVRO_VERSION=1.7.7
 export JOYENT_HTTP_VERSION=2.3
+export SQLPP11_VERSION=0.33
 
 wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-$AVRO_VERSION/cpp/avro-cpp-$AVRO_VERSION.tar.gz
 tar xvf avro-cpp-$AVRO_VERSION.tar.gz
@@ -8,6 +9,10 @@ rm avro-cpp-$AVRO_VERSION.tar.gz
 wget --no-check-certificate  https://github.com/joyent/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser-v$JOYENT_HTTP_VERSION.tar.gz
 tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 rm http_parser-v$JOYENT_HTTP_VERSION.tar.gz
+
+wget --no-check-certificate https://github.com/rbock/sqlpp11/archive/$SQLPP11_VERSION.tar.gz -Osqlpp11-v$SQLPP11_VERSION.tar.gz
+tar -xvf sqlpp11-v$SQLPP11_VERSION.tar.gz
+rm sqlpp11-v$SQLPP11_VERSION.tar.gz
 
 #until boost 1.58? when this is supposed to be included
 git clone https://github.com/boostorg/endian.git
