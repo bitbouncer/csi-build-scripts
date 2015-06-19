@@ -6,7 +6,8 @@ set VISUALSTUDIO_VERSION_MAJOR=12
 set BOOST_VERSION=1_57_0
 set BOOST_VERSION_DOTTED=1.57.0
 set OPEN_SSL_VERSION=openssl-1.0.1j
-set CURL_VERSION=7.42.0
+set C_ARES_VERSION=1.10.0
+set CURL_VERSION=7.42.1
 set ZLIB_VERSION=1.2.8
 set AVRO_VERSION=1.7.7
 set LIBEVENT_VERSION=2.0.21
@@ -22,6 +23,10 @@ del avro-cpp-%AVRO_VERSION%.tar.gz
 wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
 tar xf boost_%BOOST_VERSION%.tar.gz
 del boost_%BOOST_VERSION%.tar.gz
+
+wget http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz
+tar xvf c-ares-%C_ARES_VERSION%.tar.gz
+del c-ares-%C_ARES_VERSION%.tar.gz
 
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 tar xvf curl-%CURL_VERSION%.tar.gz
@@ -67,6 +72,25 @@ git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
+@ECHO BUILDING C-ARES
+cd c-ares-%C_ARES_VERSION%
+rmdir /s /q mscv120
+rmdir /s /q libs
+
+mkdir libs
+mkdir libs\x64
+mkdir libs\x64\Debug
+mkdir libs\x64\Release
+
+nmake -f Makefile.msvc
+
+REM copy static libs to more convenient location for CMake
+copy msvc120\cares\lib-debug\libcaresd.lib libs\x64\Debug\libcares.lib
+copy msvc120\cares\lib-release\libcares.lib libs\x64\Release\libcares.lib
+
+cd ..
+@ECHO DONE WITH C-ARES
+
 @ECHO BUILDING LIBCURL
 cd curl-%CURL_VERSION%
 
@@ -82,10 +106,10 @@ mkdir libs\win32\Debug
 mkdir libs\win32\Release
 
 cd winbuild
-SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\%OPEN_SSL_VERSION%\include\openssl
-SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32
-nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
-nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
+SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\c-ares-%C_ARES_VERSION%;..\..\%OPEN_SSL_VERSION%\include\openssl
+SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32;..\..\c-ares-%C_ARES_VERSION%\msvc120\cares\lib-debug;..\..\c-ares-%C_ARES_VERSION%\msvc120\cares\lib-release
+nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
+nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
 cd ..
 
 #non ssl builds
@@ -93,8 +117,14 @@ cd ..
 #copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
 
 #ssl static libs
-copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
-copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
+#copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
+#copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
+
+#ssl /cares static libs
+copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-cares-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
+copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-cares-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
+cd ..
+
 cd ..
 @ECHO DONE WITH CURL
 

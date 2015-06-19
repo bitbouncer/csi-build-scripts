@@ -6,7 +6,8 @@ SET(LIBEVENTPATH	    	${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
 SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-client-asio)
 SET(AVROCPP_PATH 	        ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
 SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
-SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.42.0)
+SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
+SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.42.1)
 SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
 SET(CSI_AVROCPP_PATH        ${CMAKE_SOURCE_DIR}/../csi-avro-cpp)
 SET(CSI_HTTP_PATH           ${CMAKE_SOURCE_DIR}/../csi-http)
@@ -28,6 +29,7 @@ include_directories(
     ${CSI_KAFKA_PATH}
     ${HTTP_PARSER_PATH}
 	${JSON_SPIRIT_PATH}
+    ${C_ARES_PATH}
     ${LIBCURL_PATH}/include
     ${PTHREADPATH}
 	${ZLIB_PATH}    
@@ -55,6 +57,7 @@ link_directories(
 )
 
 add_definitions(-DCURL_STATICLIB)
+add_definitions(-DCARES_STATICLIB)
 ADD_LIBRARY(ZLIB STATIC IMPORTED)
 SET_TARGET_PROPERTIES(ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_PATH}/lib/zdll.lib)
 

@@ -1,6 +1,16 @@
 export AVRO_VERSION=1.7.7
 export JOYENT_HTTP_VERSION=2.3
 export SQLPP11_VERSION=0.33
+export C_ARES_VERSION=1.10.0
+export CURL_VERSION=7.42.1
+
+wget http://c-ares.haxx.se/download/c-ares-$C_ARES_VERSION.tar.gz
+tar xvf c-ares-$C_ARES_VERSION.tar.gz
+rm c-ares-$C_ARES_VERSION.tar.gz
+
+wget http://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
+tar xvf curl-$CURL_VERSION.tar.gz
+rm curl-$CURL_VERSION.tar.gz
 
 wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-$AVRO_VERSION/cpp/avro-cpp-$AVRO_VERSION.tar.gz
 tar xvf avro-cpp-$AVRO_VERSION.tar.gz
@@ -31,6 +41,16 @@ git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
+export CFLAGS='-O2'
+cd c-ares-$C_ARES_VERSION
+./configure --disable-shared
+cd ..
+
+cd curl-$CURL_VERSION
+./configure --disable-shared --enable-ares=../c-ares-$C_ARES_VERSION
+make
+cd ..
+
 #build stuff
 cd snappy
 ./autogen.sh
@@ -38,7 +58,8 @@ cd snappy
 make all
 cd ..
 
-cd sqlpp11-v$SQLPP11_VERSION
+#not used yet...
+cd sqlpp11-$SQLPP11_VERSION
 mkdir build
 cd build
 cmake ..
@@ -46,7 +67,6 @@ make -j4
 sudo make install
 cd ..
 cd ..
-
 
 cd avro-cpp-$AVRO_VERSION
 mkdir build
