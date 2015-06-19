@@ -42,13 +42,19 @@ git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
 export CFLAGS='-O2'
+echo building c-ares
 cd c-ares-$C_ARES_VERSION
-./configure --disable-shared
+./configure 
+make
+sudo make install
 cd ..
+echo done with building c-ares
 
 cd curl-$CURL_VERSION
-./configure --disable-shared --enable-ares=../c-ares-$C_ARES_VERSION
+echo building curl
+./configure --disable-shared --enable-ares
 make
+echo done building curl
 cd ..
 
 #build stuff
