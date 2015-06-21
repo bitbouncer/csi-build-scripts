@@ -44,7 +44,7 @@ git clone https://github.com/bitbouncer/json-spirit
 export CFLAGS='-O2'
 echo building c-ares
 cd c-ares-$C_ARES_VERSION
-./configure 
+./configure --disable-shared
 make
 sudo make install
 cd ..
