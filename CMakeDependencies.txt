@@ -67,7 +67,6 @@ endif() #WIN32
 
 
 if(__LINUX__)
-set(CMAKE_MAKE_PROGRAM "${CMAKE_MAKE_PROGRAM} -j8")
 include_directories(${OPENSSLPATH}/include)
 
 link_directories(
