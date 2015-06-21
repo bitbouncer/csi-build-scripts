@@ -84,37 +84,17 @@ cd ..
 cd ..
 
 cd csi-avro-cpp
-mkdir build
-cd build
-cmake -D__CSI_HAS_OPENSSL__=1  -D__LINUX__=1 ..
-make -j4
-cd ..
+bash -e build_linux.sh
 cd ..
 
 cd json-spirit
-mkdir build
-cd build
-cmake ..
-make -j4
-sudo make install
-cd ..
+bash -e build_linux.sh
 cd ..
 
 cd csi-http
-mkdir build
-cd build
-cmake -D__CSI_HAS_OPENSSL__=1  -D__LINUX__=1 ..
-make -j4
-cd ..
+bash -e build_linux.sh
 cd ..
 
 cd csi-kafka
-mkdir build
-cd build
-cmake -D__LINUX__=1 ..
-make -j4
+bash -e build_linux.sh
 cd ..
-cd ..
-
-
-
