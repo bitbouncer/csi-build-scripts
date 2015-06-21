@@ -41,7 +41,7 @@ git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
-export CFLAGS='-O2 -DCARES_STATICLIB'
+export CFLAGS='-O2'
 echo building c-ares
 cd c-ares-$C_ARES_VERSION
 ./configure --disable-shared
