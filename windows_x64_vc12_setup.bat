@@ -6,13 +6,20 @@ set VISUALSTUDIO_VERSION_MAJOR=12
 set BOOST_VERSION=1_57_0
 set BOOST_VERSION_DOTTED=1.57.0
 set OPEN_SSL_VERSION=openssl-1.0.1j
-set C_ARES_VERSION=1.10.0
+
+REM set C_ARES_VERSION=1.10.0
+REM set CARES_DIR=c-ares-%C_ARES_VERSION%
+set CARES_DIR=c-ares
+
 set CURL_VERSION=7.42.1
 set ZLIB_VERSION=1.2.8
 set AVRO_VERSION=1.7.7
 set LIBEVENT_VERSION=2.0.21
 set PTHREAD_VERSION=2-9-1
 set JOYENT_HTTP_VERSION=2.3
+set PQXX_VERSION=4.0.1
+
+
 
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 
@@ -24,9 +31,12 @@ wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/bo
 tar xf boost_%BOOST_VERSION%.tar.gz
 del boost_%BOOST_VERSION%.tar.gz
 
-wget http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz
-tar xvf c-ares-%C_ARES_VERSION%.tar.gz
-del c-ares-%C_ARES_VERSION%.tar.gz
+REM wget http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz
+REM tar xvf c-ares-%C_ARES_VERSION%.tar.gz
+REM del c-ares-%C_ARES_VERSION%.tar.gz
+
+REM until badger merges vs2013 support
+git clone https://github.com/bitbouncer/c-ares.git
 
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 tar xvf curl-%CURL_VERSION%.tar.gz
@@ -58,6 +68,9 @@ wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz
 tar xvf zlib-%ZLIB_VERSION%.tar.gz
 del zlib-%ZLIB_VERSION%.tar.gz
 
+wget wget http://pqxx.org/download/software/libpqxx/libpqxx-%PQXX_VERSION%.tar.gz
+tar xvf libpqxx-%PQXX_VERSION%.tar.gz
+del libpqxx-%PQXX_VERSION%.tar.gz
 
 @ECHO BUILDING OPEN_SSL
 cd %OPEN_SSL_VERSION%
@@ -73,7 +86,7 @@ git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
 @ECHO BUILDING C-ARES
-cd c-ares-%C_ARES_VERSION%
+cd %CARES_DIR%
 rmdir /s /q mscv120
 rmdir /s /q libs
 
@@ -82,6 +95,8 @@ mkdir libs\x64
 mkdir libs\x64\Debug
 mkdir libs\x64\Release
 
+REM needed for git master
+call buildconf.bat
 nmake -f Makefile.msvc
 
 REM copy static libs to more convenient location for CMake
@@ -106,8 +121,8 @@ mkdir libs\win32\Debug
 mkdir libs\win32\Release
 
 cd winbuild
-SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\c-ares-%C_ARES_VERSION%;..\..\%OPEN_SSL_VERSION%\include\openssl
-SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32;..\..\c-ares-%C_ARES_VERSION%\msvc120\cares\lib-debug;..\..\c-ares-%C_ARES_VERSION%\msvc120\cares\lib-release
+SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\%CARES_DIR%;..\..\%OPEN_SSL_VERSION%\include\openssl
+SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32;..\..\%CARES_DIR%\msvc120\cares\lib-debug;..\..\%CARES_DIR%\msvc120\cares\lib-release
 nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
 nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
 cd ..
