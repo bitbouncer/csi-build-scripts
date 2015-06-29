@@ -17,8 +17,6 @@ set AVRO_VERSION=1.7.7
 set LIBEVENT_VERSION=2.0.21
 set PTHREAD_VERSION=2-9-1
 set JOYENT_HTTP_VERSION=2.3
-set PQXX_VERSION=4.0.1
-
 
 
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
@@ -81,9 +79,11 @@ cd ..
 
 git clone https://github.com/google/snappy.git
 git clone https://github.com/bitbouncer/csi-avro-cpp.git
+git clone https://github.com/bitbouncer/postgres-asio.git
 git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
+
 
 @ECHO BUILDING C-ARES
 cd %CARES_DIR%
@@ -200,6 +200,18 @@ cp -r api/*.* avro
 cd ..
 
 cd csi-avro-cpp
+rmdir /S /Q bin\x64
+rmdir /S /Q lib\x64
+rmdir /S /Q win_build64
+mkdir win_build64 
+cd win_build64
+cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 12 Win64" ..
+msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+cd ..
+cd ..
+
+cd postgres-asio
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64

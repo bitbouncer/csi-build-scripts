@@ -36,6 +36,7 @@ sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:
 sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:" endian/include/boost/endian/buffers.hpp
 
 git clone https://github.com/google/snappy.git
+git clone https://github.com/bitbouncer/postgres-asio.git
 git clone https://github.com/bitbouncer/csi-avro-cpp.git
 git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
@@ -84,6 +85,10 @@ cd ..
 cd ..
 
 cd csi-avro-cpp
+bash -e build_linux.sh
+cd ..
+
+cd postgres-asio
 bash -e build_linux.sh
 cd ..
 

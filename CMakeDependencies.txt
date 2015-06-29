@@ -9,6 +9,7 @@ SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
 SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
 SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.42.1)
 SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
+SET(POSTGRES_ASIO_PATH      ${CMAKE_SOURCE_DIR}/../postgres-asio)
 SET(CSI_AVROCPP_PATH        ${CMAKE_SOURCE_DIR}/../csi-avro-cpp)
 SET(CSI_HTTP_PATH           ${CMAKE_SOURCE_DIR}/../csi-http)
 SET(CSI_KAFKA_PATH          ${CMAKE_SOURCE_DIR}/../csi-kafka)
@@ -30,6 +31,7 @@ include_directories(
     ${HTTP_PARSER_PATH}
 	${JSON_SPIRIT_PATH}
     ${C_ARES_PATH}
+    ${POSTGRES_ASIO_PATH}
     ${LIBCURL_PATH}/include
     ${PTHREADPATH}
 	${ZLIB_PATH}    
@@ -53,6 +55,7 @@ link_directories(
     ${CSI_AVROCPP_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_HTTP_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_KAFKA_PATH}/lib/$(Platform)/$(Configuration)
+    ${POSTGRES_ASIO_PATH}/lib/$(Platform)/$(Configuration)
     ${AEROSPIKE_ASIO_PATH}/lib/$(Platform)    
 )
 
@@ -80,6 +83,7 @@ link_directories(
     ${CSI_HTTP_PATH}/lib
     ${CSI_KAFKA_PATH}/lib
     ${JSON_SPIRIT_PATH}/lib
+    ${POSTGRES_ASIO_PATH}/lib
     ${AEROSPIKE_ASIO_PATH}/lib    
 )
 
@@ -105,7 +109,6 @@ SET(CMAKE_BUILD_TYPE Release)
 SET(CMAKE_CXX_FLAGS_DISTRIBUTION "-O3")
 SET(CMAKE_C_FLAGS_DISTRIBUTION "-O3")
 endif() #LINUX
-
 
 if(__DARWIN__)
 include_directories(/opt/X11/include)
