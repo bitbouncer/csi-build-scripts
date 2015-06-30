@@ -13,7 +13,11 @@ set CARES_DIR=c-ares
 
 set CURL_VERSION=7.42.1
 set ZLIB_VERSION=1.2.8
-set AVRO_VERSION=1.7.7
+
+REM set AVRO_VERSION=1.7.7
+REM set AVRO_DIR=avro-cpp-%AVRO_VERSION%
+set AVRO_DIR=avro\lang\c++ 
+
 set LIBEVENT_VERSION=2.0.21
 set PTHREAD_VERSION=2-9-1
 set JOYENT_HTTP_VERSION=2.3
@@ -21,9 +25,12 @@ set JOYENT_HTTP_VERSION=2.3
 
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 
-wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-%AVRO_VERSION%/cpp/avro-cpp-%AVRO_VERSION%.tar.gz
-tar xvf avro-cpp-%AVRO_VERSION%.tar.gz
-del avro-cpp-%AVRO_VERSION%.tar.gz
+REM wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-%AVRO_VERSION%/cpp/avro-cpp-%AVRO_VERSION%.tar.gz
+REM tar xvf avro-cpp-%AVRO_VERSION%.tar.gz
+REM  del avro-cpp-%AVRO_VERSION%.tar.gz
+
+REM until avro changes gets merged
+git clone https://github.com/bitbouncer/avro.git
 
 wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
 tar xf boost_%BOOST_VERSION%.tar.gz
@@ -35,6 +42,7 @@ REM del c-ares-%C_ARES_VERSION%.tar.gz
 
 REM until badger merges vs2013 support
 git clone https://github.com/bitbouncer/c-ares.git
+
 
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 tar xvf curl-%CURL_VERSION%.tar.gz
@@ -65,10 +73,6 @@ del pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
 wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz
 tar xvf zlib-%ZLIB_VERSION%.tar.gz
 del zlib-%ZLIB_VERSION%.tar.gz
-
-wget wget http://pqxx.org/download/software/libpqxx/libpqxx-%PQXX_VERSION%.tar.gz
-tar xvf libpqxx-%PQXX_VERSION%.tar.gz
-del libpqxx-%PQXX_VERSION%.tar.gz
 
 @ECHO BUILDING OPEN_SSL
 cd %OPEN_SSL_VERSION%
@@ -183,10 +187,12 @@ cd ..
 
 
 @ECHO BUILDING AVRO
-cd avro-cpp-%AVRO_VERSION%
-SET BOOST_LIBRARYDIR=%CD%/../boost_%BOOST_VERSION%/lib/x64/lib
-SET BOOST_ROOT=%CD%/../boost_%BOOST_VERSION%
-SET Boost_INCLUDE_DIR=%CD%/../boost_%BOOST_VERSION%/boost
+SET BOOST_LIBRARYDIR=%CD%/boost_%BOOST_VERSION%/lib/x64/lib
+SET BOOST_ROOT=%CD%/boost_%BOOST_VERSION%
+SET Boost_INCLUDE_DIR=%CD%/boost_%BOOST_VERSION%/boost
+
+PUSHD %AVRO_DIR%
+REM cd avro-cpp-%AVRO_VERSION%
 rmdir /s /q avro
 rmdir /s /q build64
 mkdir build64
@@ -197,7 +203,7 @@ msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
 mkdir avro
 cp -r api/*.* avro
-cd ..
+POPD
 
 cd csi-avro-cpp
 rmdir /S /Q bin\x64

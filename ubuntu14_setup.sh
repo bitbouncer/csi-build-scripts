@@ -1,4 +1,8 @@
-export AVRO_VERSION=1.7.7
+#export AVRO_VERSION=1.7.7
+#export AVRO_DIR=avro-cpp-$AVRO_VERSION
+#we use branch of avro for now
+export AVRO_DIR=avro/lang/c++
+
 export JOYENT_HTTP_VERSION=2.3
 export SQLPP11_VERSION=0.33
 export C_ARES_VERSION=1.10.0
@@ -12,9 +16,11 @@ wget http://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
 tar xvf curl-$CURL_VERSION.tar.gz
 rm curl-$CURL_VERSION.tar.gz
 
-wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-$AVRO_VERSION/cpp/avro-cpp-$AVRO_VERSION.tar.gz
-tar xvf avro-cpp-$AVRO_VERSION.tar.gz
-rm avro-cpp-$AVRO_VERSION.tar.gz
+#RIGHT NOW WE ARE USING OWN AVRO BRANCH
+#wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-$AVRO_VERSION/cpp/avro-cpp-$AVRO_VERSION.tar.gz
+#tar xvf avro-cpp-$AVRO_VERSION.tar.gz
+#rm avro-cpp-$AVRO_VERSION.tar.gz
+git clone https://github.com/bitbouncer/avro
 
 wget --no-check-certificate  https://github.com/joyent/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser-v$JOYENT_HTTP_VERSION.tar.gz
 tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
@@ -75,14 +81,14 @@ sudo make install
 cd ..
 cd ..
 
-cd avro-cpp-$AVRO_VERSION
+pushd $AVRO_DIR
 mkdir build
 cd build
 cmake ..
 make -j4
 sudo make install
 cd ..
-cd ..
+popd
 
 cd csi-avro-cpp
 bash -e build_linux.sh
