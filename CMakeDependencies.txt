@@ -5,15 +5,22 @@ SET(BOOST_ENDIAN_PATH       ${CMAKE_SOURCE_DIR}/../endian)
 SET(LIBEVENTPATH	    	${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
 SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-client-asio)
 
+
 # WE ARE NOW USING A BRANCH IO AVRO CPPSET
 # SET(AVROCPP_PATH 	        ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
 SET(AVROCPP_PATH 	        ${CMAKE_SOURCE_DIR}/../avro/lang/c++) 
 
 SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
 
-# WE ARE USING A BRANCH IF C_ARES_PATH
+if(WIN32)
+# WE ARE USING A BRANCH IF C_ARES_PATH since it does not compike with vs2013
 # SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
 SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares)
+endif()
+
+if(__LINUX__)
+SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
+endif()
 
 SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.42.1)
 SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
@@ -142,12 +149,9 @@ endif() #END DARWIN
 
 #END DEPENDENCIES
 
-
-
 #COMMON DEFINITIONS
 add_definitions(-D_FILE_OFFSET_BITS=64 -D_REENTRANT -DEXTERNAL_LOCKS -DMULTITHREAD)
 add_definitions(-DBOOST_ASIO_HAS_STD_CHRONO)
-
 
 if(WIN32)
 add_definitions(-DMARCH_x86_64) 
