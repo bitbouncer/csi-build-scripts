@@ -202,7 +202,7 @@ msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
 msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
 mkdir avro
-cp -r api/*.* avro
+cp -r api/* avro
 POPD
 
 cd csi-avro-cpp
