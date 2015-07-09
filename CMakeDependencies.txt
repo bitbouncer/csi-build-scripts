@@ -77,7 +77,8 @@ link_directories(
 add_definitions(-DCURL_STATICLIB)
 add_definitions(-DCARES_STATICLIB)
 ADD_LIBRARY(ZLIB STATIC IMPORTED)
-SET_TARGET_PROPERTIES(ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_PATH}/lib/zdll.lib)
+#SET_TARGET_PROPERTIES(ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_PATH}/lib/zdll.lib)
+SET_TARGET_PROPERTIES(ZLIB PROPERTIES IMPORTED_LOCATION ${ZLIB_PATH}/zdll.lib)
 
 SET(LIBRARY_OUTPUT_PATH     ${CMAKE_SOURCE_DIR}/lib/$(Platform))
 SET(EXECUTABLE_OUTPUT_PATH  ${CMAKE_SOURCE_DIR}/bin/$(Platform))
@@ -203,7 +204,7 @@ endif()
 
 
 if(WIN32)
-set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro avrocpp_s libcurl libeay32 ssleay32 Ws2_32) 
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro avrocpp_s libcurl libeay32 ssleay32 Ws2_32 ZLIB) 
 endif()
 
 if(__LINUX__)
