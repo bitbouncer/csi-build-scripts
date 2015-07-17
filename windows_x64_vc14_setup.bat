@@ -58,6 +58,7 @@ del zlib-%ZLIB_VERSION%.tar.gz
 git clone https://github.com/google/snappy.git
 git clone https://github.com/bitbouncer/csi-avro-cpp.git
 git clone https://github.com/bitbouncer/csi-http.git
+git clone https://github.com/bitbouncer/csi-avro-utils.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
@@ -172,6 +173,18 @@ cd ..
 cd ..
 
 cd csi-http
+rmdir /S /Q bin\x64
+rmdir /S /Q lib\x64
+rmdir /S /Q win_build64
+mkdir win_build64 
+cd win_build64
+cmake -D__CSI_HAS_OPENSSL__=1  -G "Visual Studio 14 2015 Win64" ..
+msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+cd ..
+cd ..
+
+cd csi-avro-utils
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64

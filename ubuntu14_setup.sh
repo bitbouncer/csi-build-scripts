@@ -45,6 +45,7 @@ git clone https://github.com/google/snappy.git
 git clone https://github.com/bitbouncer/postgres-asio.git
 git clone https://github.com/bitbouncer/csi-avro-cpp.git
 git clone https://github.com/bitbouncer/csi-http.git
+git clone https://github.com/bitbouncer/csi-avro-utils.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
 
@@ -103,6 +104,10 @@ bash -e build_linux.sh
 cd ..
 
 cd csi-http
+bash -e build_linux.sh
+cd ..
+
+cd csi-avro-utils
 bash -e build_linux.sh
 cd ..
 
