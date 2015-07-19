@@ -69,10 +69,6 @@ call ms\do_win64a
 nmake -f ms\nt.mak
 cd ..
 
-
-
-
-
 @ECHO BUILDING LIBCURL
 cd curl-%CURL_VERSION%
 
