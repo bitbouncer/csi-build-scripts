@@ -20,6 +20,7 @@ Downloads and builds (where needed)
 
 Install build tools
 ```
+sudo apt-get update
 sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libboost-all-dev libpq-dev
 
 ```
