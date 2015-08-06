@@ -43,11 +43,11 @@ sed -i "s:<boost/core/scoped_enum.hpp>:<boost/detail/scoped_enum_emulation.hpp>:
 
 git clone https://github.com/google/snappy.git
 git clone https://github.com/bitbouncer/postgres-asio.git
-git clone https://github.com/bitbouncer/csi-avro-cpp.git
 git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-avro-utils.git
 git clone https://github.com/bitbouncer/csi-kafka.git
 git clone https://github.com/bitbouncer/json-spirit
+git clone https://github.com/bitbouncer/csi-samples
 
 export CFLAGS='-O2'
 echo building c-ares
@@ -90,10 +90,6 @@ make -j4
 sudo make install
 cd ..
 popd
-
-cd csi-avro-cpp
-bash -e build_linux.sh
-cd ..
 
 cd postgres-asio
 bash -e build_linux.sh

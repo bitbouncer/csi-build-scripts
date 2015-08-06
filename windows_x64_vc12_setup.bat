@@ -82,11 +82,12 @@ nmake -f ms\nt.mak
 cd ..
 
 git clone https://github.com/google/snappy.git
-git clone https://github.com/bitbouncer/csi-avro-cpp.git
 git clone https://github.com/bitbouncer/postgres-asio.git
-git clone https://github.com/bitbouncer/csi-http.git
 git clone https://github.com/bitbouncer/csi-kafka.git
+git clone https://github.com/bitbouncer/csi-http.git
+git clone https://github.com/bitbouncer/csi-avro-utils.git
 git clone https://github.com/bitbouncer/json-spirit
+git clone https://github.com/bitbouncer/csi-samples
 
 
 @ECHO BUILDING C-ARES
@@ -206,7 +207,7 @@ mkdir avro
 cp -r api/* avro
 POPD
 
-cd csi-avro-cpp
+cd csi-avro-utils
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
@@ -266,5 +267,16 @@ msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
 cd ..
 cd ..
 
+cd csi-samples
+rmdir /S /Q bin\x64
+rmdir /S /Q lib\x64
+rmdir /S /Q win_build64
+mkdir win_build64 
+cd win_build64
+cmake  -G "Visual Studio 12 Win64" ..
+msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+msbuild ALL_BUILD.vcxproj /p:Configuration=Release /p:Platform=x64
+cd ..
+cd ..
 
 
