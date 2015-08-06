@@ -25,7 +25,6 @@ endif()
 SET(LIBCURL_PATH            ${CMAKE_SOURCE_DIR}/../curl-7.42.1)
 SET(JSON_SPIRIT_PATH        ${CMAKE_SOURCE_DIR}/../json-spirit)
 SET(POSTGRES_ASIO_PATH      ${CMAKE_SOURCE_DIR}/../postgres-asio)
-SET(CSI_AVROCPP_PATH        ${CMAKE_SOURCE_DIR}/../csi-avro-cpp)
 SET(CSI_HTTP_PATH           ${CMAKE_SOURCE_DIR}/../csi-http)
 SET(CSI_AVRO_UTILS_PATH     ${CMAKE_SOURCE_DIR}/../csi-avro-utils)
 SET(CSI_KAFKA_PATH          ${CMAKE_SOURCE_DIR}/../csi-kafka)
@@ -41,7 +40,6 @@ include_directories(
     ${AEROSPIKE_ASIO_PATH}
     ${LIBEVENTPATH}/include
     ${AVROCPP_PATH}
-    ${CSI_AVROCPP_PATH}
     ${CSI_HTTP_PATH}
     ${CSI_AVRO_UTILS_PATH}
     ${CSI_KAFKA_PATH}
@@ -69,7 +67,6 @@ link_directories(
     ${LIBEVENTPATH}
     ${PTHREADPATH}
     ${JSON_SPIRIT_PATH}/lib/$(Platform)/$(Configuration)
-    ${CSI_AVROCPP_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_HTTP_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_AVRO_UTILS_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_KAFKA_PATH}/lib/$(Platform)/$(Configuration)
@@ -98,7 +95,6 @@ link_directories(
     ${C_ARES_PATH}/.libs
     ${OPENSSLPATH}
     ${AVROCPP_PATH}/build
-    ${CSI_AVROCPP_PATH}/lib
     ${CSI_HTTP_PATH}/lib
     ${CSI_AVRO_UTILS_PATH}/lib
     ${CSI_KAFKA_PATH}/lib
@@ -209,18 +205,18 @@ endif()
 
 
 if(WIN32)
-set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro avrocpp_s libcurl libeay32 ssleay32 Ws2_32 ZLIB) 
+set(CSI_HTTP_LIBS csi-http csi-http-parser avrocpp_s libcurl libeay32 ssleay32 Ws2_32 ZLIB) 
 set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
 endif()
 
 if(__LINUX__)
-set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro avrocpp_s boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares idn ldap lber ssl crypto rt pthread z rtmp c)
+set(CSI_HTTP_LIBS csi-http csi-http-parser avrocpp_s boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares idn ldap lber ssl crypto rt pthread z rtmp c)
 set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
 endif()
 
 #most likely wrong since I don't have a mac anymore...
 if(__DARWIN__)
-set(EXT_LIBS csi-http csi-http-parser csi-avro avrocpp_s boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_filesystem boost_locale LIBCURL crypto ssl stdc++ pthread c)
+set(EXT_LIBS csi-http csi-http-parser avrocpp_s boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_filesystem boost_locale LIBCURL crypto ssl stdc++ pthread c)
 set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
 endif()
 
