@@ -110,3 +110,7 @@ cd ..
 cd csi-kafka
 bash -e build_linux.sh
 cd ..
+
+cd csi-samples
+bash -e build_linux.sh
+cd ..
