@@ -87,6 +87,10 @@ endif() #WIN32
 
 if(__LINUX__)
 INCLUDE(${CMAKE_SOURCE_DIR}/../csi-build-scripts/CheckLSBTypes.cmake)
+if(LSB_DISTRIBUTOR_ID STREQUAL "centos")
+add_definitions(-D__CENTOS__)
+endif()
+
 include_directories(${OPENSSLPATH}/include)
 
 link_directories(
@@ -179,7 +183,6 @@ endif()
 
 
 if(__LINUX__)
-add_definitions(-D__LSB_DISTRIBUTOR_ID__=${LSB_DISTRIBUTOR_ID})
 add_definitions(-D__LINUX__)
 add_definitions(-fPIC)
 #if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.8.0")
