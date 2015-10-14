@@ -86,7 +86,7 @@ endif() #WIN32
 
 
 if(__LINUX__)
-INCLUDE(CheckLSBTypes.cmake)
+INCLUDE(${CMAKE_SOURCE_DIR}/../csi-build-scripts/CheckLSBTypes.cmake)
 include_directories(${OPENSSLPATH}/include)
 
 link_directories(
