@@ -5,7 +5,7 @@ Common buildscripts for bitbouncer repos.
 Downloads and build all required libs. The purpose is to have a common build system to make it trivial to use Visual Studio during development and deploy production code on Linux
 
 Downloads and builds (where needed)
-  * Boost              1.57
+  * Boost              1.59
   * OpenSSL            1.0.1j
   * libcurl            7.0.39
   * zlib               1.2.8
@@ -58,6 +58,23 @@ mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/ubuntu12_setup.sh
+```
+
+## Centos 7 x64:
+
+Install build tools (as root)
+```
+yum -y update
+yum -y groupinstall 'Development Tools'
+yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel
+```
+
+Get and build necessary dependencies (as root)
+```
+mkdir source
+cd source
+git clone https://github.com/bitbouncer/csi-build-scripts.git
+bash csi-build-scripts/centos7_setup.sh
 ```
 
 ## Raspberry Pi - cross compiling on ubuntu14 x32
