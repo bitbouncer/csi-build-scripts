@@ -33,8 +33,9 @@ REM until avro changes gets merged
 git clone https://github.com/bitbouncer/avro.git
 
 wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
-tar xf boost_%BOOST_VERSION%.tar.gz
-del boost_%BOOST_VERSION%.tar.gz
+gunzip boost_%BOOST_VERSION%.tar.gz
+tar xf boost_%BOOST_VERSION%.tar
+del boost_%BOOST_VERSION%.tar
 
 REM wget http://c-ares.haxx.se/download/c-ares-%C_ARES_VERSION%.tar.gz
 REM tar xvf c-ares-%C_ARES_VERSION%.tar.gz
