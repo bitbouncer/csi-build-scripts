@@ -1,20 +1,20 @@
-SET(OPENSSLPATH				${CMAKE_SOURCE_DIR}/../openssl-1.0.1j)
-SET(ZLIB_PATH				${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
-SET(BOOST_PATH 		  		${CMAKE_SOURCE_DIR}/../boost_1_57_0)
+SET(OPENSSLPATH             ${CMAKE_SOURCE_DIR}/../openssl-1.0.1j)
+SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
+SET(BOOST_PATH              ${CMAKE_SOURCE_DIR}/../boost_1_59_0)
 SET(BOOST_ENDIAN_PATH       ${CMAKE_SOURCE_DIR}/../endian)
-SET(LIBEVENTPATH	    	${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
+SET(LIBEVENTPATH            ${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
 SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-asio)
 
 
-# WE ARE NOW USING A BRANCH IO AVRO CPPSET
-# SET(AVROCPP_PATH 	        ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
-SET(AVROCPP_PATH 	        ${CMAKE_SOURCE_DIR}/../avro/lang/c++) 
+# WE ARE CURRENTLY USING A BRANCH IO AVRO CPPSET
+# SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
+SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro/lang/c++) 
 
 SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
 
 if(WIN32)
 # WE ARE USING A BRANCH IF C_ARES_PATH since it does not compike with vs2013
-# SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
+# SET(C_ARES_PATH           ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
 SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares)
 endif()
 
