@@ -86,6 +86,7 @@ endif() #WIN32
 
 
 if(__LINUX__)
+INCLUDE(CheckLSBTypes)
 include_directories(${OPENSSLPATH}/include)
 
 link_directories(
