@@ -3,8 +3,8 @@ REM make sure that active perl is before any other perl - git's for example in P
 
 set VISUALSTUDIO_VERSION=14.0
 set VISUALSTUDIO_VERSION_MAJOR=14
-set BOOST_VERSION=1_57_0
-set BOOST_VERSION_DOTTED=1.57.0
+set BOOST_VERSION=1_59_0
+set BOOST_VERSION_DOTTED=1.59.0
 set OPEN_SSL_VERSION=openssl-1.0.1j
 set CURL_VERSION=7.39.0
 set ZLIB_VERSION=1.2.8
