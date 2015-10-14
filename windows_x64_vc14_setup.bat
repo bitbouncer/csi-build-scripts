@@ -16,44 +16,44 @@ set JOYENT_HTTP_VERSION=2.3
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 
 wget ftp://ftp.sunet.se/pub/www/servers/apache/dist/avro/avro-%AVRO_VERSION%/cpp/avro-cpp-%AVRO_VERSION%.tar.gz
-tar xvf avro-cpp-%AVRO_VERSION%.tar.gz
-del avro-cpp-%AVRO_VERSION%.tar.gz
+gunzip avro-cpp-%AVRO_VERSION%.tar.gz
+tar xf  avro-cpp-%AVRO_VERSION%.tar
+del avro-cpp-%AVRO_VERSION%.tar
 
 wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
-tar xf boost_%BOOST_VERSION%.tar.gz
-del boost_%BOOST_VERSION%.tar.gz
+gunzip boost_%BOOST_VERSION%.tar.gz
+tar xf boost_%BOOST_VERSION%.tar
+del boost_%BOOST_VERSION%.tar
 
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
-tar xvf curl-%CURL_VERSION%.tar.gz
-del curl-%CURL_VERSION%.tar.gz
-
-
-#until boost 1.57 when this was supposed to be included
-git clone https://github.com/boostorg/endian.git
-#back two thing out of trunk to compile under boost < 1.57
-#sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/types.hpp
-#sed -i "s:<boost/predef/detail/endian_compat.h>:<boost/detail/endian.hpp>:" endian/include/boost/endian/conversion.hpp
+gunzip curl-%CURL_VERSION%.tar.gz
+tar xf curl-%CURL_VERSION%.tar
+del curl-%CURL_VERSION%.tar
 
 wget --no-check-certificate https://github.com/joyent/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
-tar -xvf http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
-del http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
+gunzip http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
+tar xf http_parser-v%JOYENT_HTTP_VERSION%.tar
+del http_parser-v%JOYENT_HTTP_VERSION%.tar
 
 wget --no-check-certificate https://github.com/libevent/libevent/archive/release-%LIBEVENT_VERSION%-stable.tar.gz -Olibevent-%LIBEVENT_VERSION%-stable.tar.gz
-tar xvf libevent-%LIBEVENT_VERSION%-stable.tar.gz
-del libevent-%LIBEVENT_VERSION%-stable.tar.gz
+gunzip libevent-%LIBEVENT_VERSION%-stable.tar.gz
+tar xf libevent-%LIBEVENT_VERSION%-stable.tar
+del libevent-%LIBEVENT_VERSION%-stable.tar
 
 wget  http://www.openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
-tar xvf %OPEN_SSL_VERSION%.tar.gz
-del %OPEN_SSL_VERSION%.tar.gz
+gunzip %OPEN_SSL_VERSION%.tar.gz
+tar xf %OPEN_SSL_VERSION%.tar
+del %OPEN_SSL_VERSION%.tar
 
 wget ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
-tar xvf pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
-del pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
+gunzip pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
+tar xf pthreads-w32-%PTHREAD_VERSION%-release.tar
+del pthreads-w32-%PTHREAD_VERSION%-release.tar
 
 wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz
-tar xvf zlib-%ZLIB_VERSION%.tar.gz
-del zlib-%ZLIB_VERSION%.tar.gz
-
+gunzip zlib-%ZLIB_VERSION%.tar.gz
+tar xf zlib-%ZLIB_VERSION%.tar
+del zlib-%ZLIB_VERSION%.tar
 
 git clone https://github.com/google/snappy.git
 git clone https://github.com/bitbouncer/csi-avro-cpp.git
