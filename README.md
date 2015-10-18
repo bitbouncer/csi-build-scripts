@@ -27,11 +27,12 @@ sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip bui
 
 Get and build necessary dependencies
 ```
-sudo ls
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/ubuntu14_setup.sh
+bash csi-build-scripts/linux_setup_3rd_part.sh
+bash csi-build-scripts/linux_get_csi.sh
+bash csi-build-scripts/linux_rebuild_csi.sh
 ```
 ## Ubuntu 12 x64:
 
@@ -53,7 +54,6 @@ http://charette.no-ip.com:81/programming/2011-12-24_GCCv47/
 
 Get and build nessessary dependencies
 ```
-sudo ls
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
@@ -74,7 +74,9 @@ Get and build necessary dependencies (as root)
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/centos7_setup.sh
+bash csi-build-scripts/linux_setup_3rd_part.sh
+bash csi-build-scripts/linux_get_csi.sh
+bash csi-build-scripts/linux_rebuild_csi.sh
 ```
 
 ## Raspberry Pi - cross compiling on ubuntu14 x32
@@ -93,7 +95,6 @@ source ~/.bashrc
 ```
 Get and build nessessary dependencies 
 ```
-sudo ls
 mkdir raspbian_bitbouncer
 cd raspbian_bitbouncer
 git clone https://github.com/bitbouncer/csi-build-scripts.git
