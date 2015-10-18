@@ -9,7 +9,7 @@ set OPEN_SSL_VERSION=openssl-1.0.1j
 
 REM set C_ARES_VERSION=1.10.0
 REM set CARES_DIR=c-ares-%C_ARES_VERSION%
-set CARES_DIR=c-ares
+set CARES_DIR=c-ares-master
 
 set CURL_VERSION=7.42.1
 set ZLIB_VERSION=1.2.8
@@ -41,10 +41,11 @@ REM tar xvf c-ares-%C_ARES_VERSION%.tar.gz
 REM del c-ares-%C_ARES_VERSION%.tar.gz
 REM until badger merges vs2013 support
 
-git clone https://github.com/badger/c-ares.git
+wget --no-check-certificate https://github.com/bagder/c-ares/archive/master.zip  -Oc-ares.zip
+unzip c-ares.zip
+del c-ares.zip
 
 git clone https://github.com/google/snappy.git
-
 
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 gunzip curl-%CURL_VERSION%.tar.gz
