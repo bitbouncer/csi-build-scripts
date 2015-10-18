@@ -31,7 +31,9 @@ sudo ls
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/ubuntu14_setup.sh
+bash csi-build-scripts/linux_setup_3rd_part.sh
+bash csi-build-scripts/linux_get_csi.sh
+bash csi-build-scripts/linux_rebuild_csi.sh
 ```
 ## Ubuntu 12 x64:
 
@@ -74,7 +76,9 @@ Get and build necessary dependencies (as root)
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/centos7_setup.sh
+bash csi-build-scripts/linux_setup_3rd_part.sh
+bash csi-build-scripts/linux_get_csi.sh
+bash csi-build-scripts/linux_rebuild_csi.sh
 ```
 
 ## Raspberry Pi - cross compiling on ubuntu14 x32
