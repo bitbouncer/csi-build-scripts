@@ -177,8 +177,8 @@ cd boost_%BOOST_VERSION%
 rmdir /s /q bin.v2
 REM call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 call bootstrap.bat
-b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete --stagedir=lib\x64 stage -s ZLIB_INCLUDE=%CD%\..\zlib-%ZLIB_VERSION% -s ZLIB_LIBPATH=%CD%\..\zlib-%ZLIB_VERSION%
-REM  4 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
+#b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete --stagedir=lib\x64 stage -s ZLIB_INCLUDE=%CD%\..\zlib-%ZLIB_VERSION% -s ZLIB_LIBPATH=%CD%\..\zlib-%ZLIB_VERSION%
+b2 -j 8 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
 rmdir /s /q bin.v2
 
 REM call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" x86
