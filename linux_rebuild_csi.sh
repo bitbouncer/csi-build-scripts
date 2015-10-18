@@ -8,13 +8,11 @@ export AVRO_DIR=avro/lang/c++
 
 pushd $AVRO_DIR
 git pull
-mkdir build
-cd build
-cmake ..
-make -j4
-sudo make install
-cd ..
 popd
+
+rm -rf $AVRO_DIR/avro 
+mkdir $AVRO_DIR/avro 
+cp -r $AVRO_DIR/api/* $AVRO_DIR/avro
 
 cd json-spirit
 git pull
