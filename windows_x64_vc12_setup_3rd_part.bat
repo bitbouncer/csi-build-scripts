@@ -138,7 +138,6 @@ cd ..
 #ssl /cares static libs
 copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-cares-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
 copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-cares-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
-cd ..
 
 cd ..
 @ECHO DONE WITH CURL
@@ -148,14 +147,6 @@ cd ..
 cd zlib-%ZLIB_VERSION%
 nmake -f win32/Makefile.msc
 cd ..
-
-
-@ECHO BUILDING LIBEVENT
-cd libevent-%LIBEVENT_VERSION%-stable
-#./configure --disable-shared
-#./configure
-#make
-#cd ..
 
 @ECHO BUILDING PTHREADS
 cd pthreads-w32-%PTHREAD_VERSION%-release
