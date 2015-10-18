@@ -27,7 +27,6 @@ sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip bui
 
 Get and build necessary dependencies
 ```
-sudo ls
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
@@ -55,7 +54,6 @@ http://charette.no-ip.com:81/programming/2011-12-24_GCCv47/
 
 Get and build nessessary dependencies
 ```
-sudo ls
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
@@ -97,7 +95,6 @@ source ~/.bashrc
 ```
 Get and build nessessary dependencies 
 ```
-sudo ls
 mkdir raspbian_bitbouncer
 cd raspbian_bitbouncer
 git clone https://github.com/bitbouncer/csi-build-scripts.git
