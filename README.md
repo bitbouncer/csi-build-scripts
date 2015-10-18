@@ -110,7 +110,9 @@ Install Visual Studio, cmake, nasm, git and active perl manually, make sure acti
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-csi-build-scripts\windows_x64_vc12_setup.bat
+csi-build-scripts\windows_x64_vc12_setup_3rd_part.bat
+csi-build-scripts\windows_x64_vc12_get_csi.bat
+csi-build-scripts\windows_x64_vc12_rebuild_csi.bat
 ```
 
 License:
