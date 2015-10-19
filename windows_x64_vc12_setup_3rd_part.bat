@@ -66,6 +66,7 @@ wget  http://www.openssl.org/source/%OPEN_SSL_VERSION%.tar.gz
 gunzip %OPEN_SSL_VERSION%.tar.gz
 tar xf %OPEN_SSL_VERSION%.tar
 del %OPEN_SSL_VERSION%.tar
+rmdir /s /q %OPEN_SSL_VERSION%\include
 
 wget ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
 gunzip pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
@@ -82,6 +83,8 @@ cd %OPEN_SSL_VERSION%
 start /WAIT perl Configure VC-WIN64A --prefix=/OpenSSL-Win64
 call ms\do_win64a
 nmake -f ms\nt.mak
+mkdir include
+xcopy /e /s inc32\* include
 cd ..
 
 
