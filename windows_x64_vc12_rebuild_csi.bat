@@ -25,6 +25,7 @@ set JOYENT_HTTP_VERSION=2.3
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 
 cd json-spirit
+git pull
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
@@ -37,6 +38,7 @@ cd ..
 cd ..
 
 cd csi-http
+git pull
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
@@ -49,6 +51,7 @@ cd ..
 cd ..
 
 cd csi-avro-utils
+git pull
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
@@ -61,6 +64,7 @@ cd ..
 cd ..
 
 cd postgres-asio
+git pull
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
@@ -74,6 +78,7 @@ cd ..
 
 
 cd csi-kafka
+git pull
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
@@ -86,6 +91,7 @@ cd ..
 cd ..
 
 cd csi-samples
+git pull
 rmdir /S /Q bin\x64
 rmdir /S /Q lib\x64
 rmdir /S /Q win_build64
