@@ -15,7 +15,7 @@ Downloads and builds (where needed)
   * libevent           2.0.21 (windows)
   * pthread            2.9.1  (windows)
   * snappy             (master)
-  * boost_endian       (master)
+ 
 
 ## Windows x64 - Visual Studio 12
 
