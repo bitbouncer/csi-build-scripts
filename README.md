@@ -96,10 +96,12 @@ source ~/.bashrc
 ```
 Get and build nessessary dependencies 
 ```
-mkdir raspbian_bitbouncer
-cd raspbian_bitbouncer
+mkdir raspbian_source
+cd raspbian_source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/raspbian_ubuntu32_setup.sh
+bash csi-build-scripts/raspbian_ubuntu32_setup_3rd_part.sh
+bash csi-build-scripts/linux_get_csi.sh
+bash csi-build-scripts/raspbian_ubuntu32_rebuild_csi.sh
 ```
 
 ## Windows x64 - Visual Studio 12
