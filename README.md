@@ -15,7 +15,21 @@ Downloads and builds (where needed)
   * libevent           2.0.21 (windows)
   * pthread            2.9.1  (windows)
   * snappy             (master)
-  * boost_endian       (master)
+ 
+
+## Windows x64 - Visual Studio 12
+
+Get and build nessessary dependencies
+```
+Install Visual Studio, cmake, nasm, git and active perl manually, make sure active perl is before git in PATH
+
+mkdir source
+cd source
+git clone https://github.com/bitbouncer/csi-build-scripts.git
+csi-build-scripts\windows_x64_vc12_setup_3rd_part.bat
+csi-build-scripts\windows_x64_vc12_get_csi.bat
+csi-build-scripts\windows_x64_vc12_rebuild_csi.bat
+```
 
 ## Ubuntu 14 x64:
 
@@ -35,7 +49,52 @@ bash csi-build-scripts/linux_setup_3rd_part.sh
 bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/linux_rebuild_csi.sh
 ```
-## Ubuntu 12 x64:
+
+
+## Centos 7 x64:
+
+Install build tools (as root)
+```
+yum -y update
+yum -y groupinstall 'Development Tools'
+yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel
+```
+
+Get and build necessary dependencies (as root)
+```
+mkdir source
+cd source
+git clone https://github.com/bitbouncer/csi-build-scripts.git
+bash csi-build-scripts/linux_setup_3rd_part.sh
+bash csi-build-scripts/linux_get_csi.sh
+bash csi-build-scripts/linux_rebuild_csi.sh
+```
+
+## Raspberry Pi - cross compiling on ubuntu14 x32 (currently broken)
+
+Install build tools
+```
+sudo apt-get -y install cmake wget unzip cmake wget wput libpcre3 libpcre3-dev build-essential git subversion 
+mkdir -p ~/xtools
+cd ~/xtools
+git clone https://github.com/raspberrypi/tools.git --depth 1
+cd ..
+echo "export PATH=~/xtools/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:\$PATH" >> ~/.bashrc
+source ~/.bashrc
+
+
+```
+Get and build nessessary dependencies 
+```
+mkdir raspbian_source
+cd raspbian_source
+git clone https://github.com/bitbouncer/csi-build-scripts.git
+bash csi-build-scripts/raspbian_ubuntu32_setup_3rd_part.sh
+bash csi-build-scripts/linux_get_csi.sh
+bash csi-build-scripts/raspbian_ubuntu32_rebuild_csi.sh
+```
+
+## Ubuntu 12 x64 (deprecated): 
 
 Install build tools
 ```
@@ -61,62 +120,6 @@ git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/ubuntu12_setup.sh
 ```
 
-## Centos 7 x64:
-
-Install build tools (as root)
-```
-yum -y update
-yum -y groupinstall 'Development Tools'
-yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel
-```
-
-Get and build necessary dependencies (as root)
-```
-mkdir source
-cd source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/linux_setup_3rd_part.sh
-bash csi-build-scripts/linux_get_csi.sh
-bash csi-build-scripts/linux_rebuild_csi.sh
-```
-
-## Raspberry Pi - cross compiling on ubuntu14 x32
-
-Install build tools
-```
-sudo apt-get -y install cmake wget unzip cmake wget wput libpcre3 libpcre3-dev build-essential git subversion 
-mkdir -p ~/xtools
-cd ~/xtools
-git clone https://github.com/raspberrypi/tools.git --depth 1
-cd ..
-echo "export PATH=~/xtools/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian/bin:\$PATH" >> ~/.bashrc
-source ~/.bashrc
-
-
-```
-Get and build nessessary dependencies 
-```
-mkdir raspbian_source
-cd raspbian_source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/raspbian_ubuntu32_setup_3rd_part.sh
-bash csi-build-scripts/linux_get_csi.sh
-bash csi-build-scripts/raspbian_ubuntu32_rebuild_csi.sh
-```
-
-## Windows x64 - Visual Studio 12
-
-Get and build nessessary dependencies
-```
-Install Visual Studio, cmake, nasm, git and active perl manually, make sure active perl is before git in PATH
-
-mkdir source
-cd source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-csi-build-scripts\windows_x64_vc12_setup_3rd_part.bat
-csi-build-scripts\windows_x64_vc12_get_csi.bat
-csi-build-scripts\windows_x64_vc12_rebuild_csi.bat
-```
 
 License:
 - Boost Software License, Version 1.0.
