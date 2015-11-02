@@ -17,6 +17,20 @@ Downloads and builds (where needed)
   * snappy             (master)
   * boost_endian       (master)
 
+## Windows x64 - Visual Studio 12
+
+Get and build nessessary dependencies
+```
+Install Visual Studio, cmake, nasm, git and active perl manually, make sure active perl is before git in PATH
+
+mkdir source
+cd source
+git clone https://github.com/bitbouncer/csi-build-scripts.git
+csi-build-scripts\windows_x64_vc12_setup_3rd_part.bat
+csi-build-scripts\windows_x64_vc12_get_csi.bat
+csi-build-scripts\windows_x64_vc12_rebuild_csi.bat
+```
+
 ## Ubuntu 14 x64:
 
 Install build tools
@@ -35,31 +49,7 @@ bash csi-build-scripts/linux_setup_3rd_part.sh
 bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/linux_rebuild_csi.sh
 ```
-## Ubuntu 12 x64:
 
-Install build tools
-```
-sudo apt-get install -y software-properties-common python-software-properties
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt-get update
-sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libboost-all-dev libpq-dev
-sudo apt-get install -y gcc-4.8 g++-4.8
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 10 --slave /usr/bin/g++ g++ /usr/bin/g++-4.6
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
-
-```
-see for changing between compilers
-http://charette.no-ip.com:81/programming/2011-12-24_GCCv47/
-
-
-Get and build nessessary dependencies
-```
-mkdir source
-cd source
-git clone https://github.com/bitbouncer/csi-build-scripts.git
-bash csi-build-scripts/ubuntu12_setup.sh
-```
 
 ## Centos 7 x64:
 
@@ -104,19 +94,32 @@ bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/raspbian_ubuntu32_rebuild_csi.sh
 ```
 
-## Windows x64 - Visual Studio 12
+## Ubuntu 12 x64 (deprecated): 
+
+Install build tools
+```
+sudo apt-get install -y software-properties-common python-software-properties
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libboost-all-dev libpq-dev
+sudo apt-get install -y gcc-4.8 g++-4.8
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 10 --slave /usr/bin/g++ g++ /usr/bin/g++-4.6
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
+
+```
+see for changing between compilers
+http://charette.no-ip.com:81/programming/2011-12-24_GCCv47/
+
 
 Get and build nessessary dependencies
 ```
-Install Visual Studio, cmake, nasm, git and active perl manually, make sure active perl is before git in PATH
-
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
-csi-build-scripts\windows_x64_vc12_setup_3rd_part.bat
-csi-build-scripts\windows_x64_vc12_get_csi.bat
-csi-build-scripts\windows_x64_vc12_rebuild_csi.bat
+bash csi-build-scripts/ubuntu12_setup.sh
 ```
+
 
 License:
 - Boost Software License, Version 1.0.
