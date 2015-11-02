@@ -5,23 +5,24 @@ Common buildscripts for bitbouncer repos.
 Downloads and build all required libs. The purpose is to have a common build system to make it trivial to use Visual Studio during development and deploy production code on Linux
 
 Downloads and builds (where needed)
-  * Boost              1.59
-  * OpenSSL            1.0.1j
-  * libcurl            7.0.39
-  * zlib               1.2.8
+  * cares              1.10.0 
+  * libcurl            7.0.39 
+  * joyent_http_parser 2.3 
+  * boost              1.59
   * avro_cpp           1.7.7
-  * libevent           2.0.21
-  * pthread            2.9.1
-  * joyent_http_parser 2.3
-  * snappy (master)
-  * boost_endian (master)
+  * openSSL            1.0.1j (windows)
+  * zlib               1.2.8  (windows)
+  * libevent           2.0.21 (windows)
+  * pthread            2.9.1  (windows)
+  * snappy             (master)
+  * boost_endian       (master)
 
 ## Ubuntu 14 x64:
 
 Install build tools
 ```
 sudo apt-get update
-sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libboost-all-dev libpq-dev
+sudo apt-get install -y automake autogen shtool libtool git wget cmake unzip build-essential g++ python-dev autotools-dev libicu-dev zlib1g-dev openssl libssl-dev libcurl4-openssl-dev libbz2-dev libcurl3 libpq-dev
 
 ```
 
