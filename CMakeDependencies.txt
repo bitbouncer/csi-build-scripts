@@ -217,6 +217,11 @@ else()
 set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares idn ldap lber ssl crypto rt pthread z rtmp c)
 endif()
 
+#just override if we're crosscompiling for raspberry
+if(__RASPBIAN__)
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares ssl crypto rt pthread z rtmp c)
+endif()
+
 set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
 endif()
 
