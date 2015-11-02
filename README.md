@@ -70,7 +70,7 @@ bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/linux_rebuild_csi.sh
 ```
 
-## Raspberry Pi - cross compiling on ubuntu14 x32 (currently broken)
+## Raspberry Pi - cross compiling on ubuntu14 x32
 
 Install build tools
 ```
