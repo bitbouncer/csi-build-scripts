@@ -123,11 +123,20 @@ mkdir libs\win32
 mkdir libs\win32\Debug
 mkdir libs\win32\Release
 
+#this is for cares build
+#cd winbuild
+#SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\%CARES_DIR%;..\..\%OPEN_SSL_VERSION%\include\openssl
+#SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32;..\..\%CARES_DIR%\msvc120\cares\lib-debug;..\..\%CARES_DIR%\msvc120\cares\lib-release
+#nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
+#nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
+#cd ..
+
+#this is without c-ares
 cd winbuild
-SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\%CARES_DIR%;..\..\%OPEN_SSL_VERSION%\include\openssl
-SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32;..\..\%CARES_DIR%\msvc120\cares\lib-debug;..\..\%CARES_DIR%\msvc120\cares\lib-release
-nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
-nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_CARES=static WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
+SET INCLUDE=%INCLUDE%;..\..\%OPEN_SSL_VERSION%\include;..\include;..\..\%OPEN_SSL_VERSION%\include\openssl
+SET LIB=%LIB%;..\..\%OPEN_SSL_VERSION%\out32;
+nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=yes MACHINE=x64
+nmake /f makefile.vc mode=static VC=%VISUALSTUDIO_VERSION_MAJOR% WITH_SSL=static ENABLE_SSPI=no ENABLE_WINSSL=no ENABLE_IDN=no DEBUG=no MACHINE=x64
 cd ..
 
 #non ssl builds
@@ -135,12 +144,12 @@ cd ..
 #copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
 
 #ssl static libs
-#copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
-#copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
+copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
+copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
 
-#ssl /cares static libs
-copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-cares-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
-copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-cares-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
+#ssl + cares static libs
+#copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-debug-static-ssl-static-cares-static-ipv6\lib\libcurl_a_debug.lib libs\x64\Debug\libcurl.lib 
+#copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static-cares-static-ipv6\lib\libcurl_a.lib libs\x64\Release\libcurl.lib 
 
 cd ..
 @ECHO DONE WITH CURL
