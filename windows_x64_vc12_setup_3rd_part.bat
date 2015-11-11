@@ -11,8 +11,10 @@ REM set C_ARES_VERSION=1.10.0
 REM set CARES_DIR=c-ares-%C_ARES_VERSION%
 set CARES_DIR=c-ares-master
 
+
 set CURL_VERSION=7.42.1
 set ZLIB_VERSION=1.2.8
+set SNAPPY_VERSION=1.1.3
 
 REM set AVRO_VERSION=1.7.7
 REM set AVRO_DIR=avro-cpp-%AVRO_VERSION%
@@ -45,7 +47,10 @@ wget --no-check-certificate https://github.com/bagder/c-ares/archive/master.zip 
 unzip c-ares.zip
 del c-ares.zip
 
-git clone https://github.com/google/snappy.git
+wget --no-check-certificate https://github.com/google/snappy/releases/download/%SNAPPY_VERSION%/snappy-%SNAPPY_VERSION%.tar.gz  -Osnappy-%SNAPPY_VERSION%.tar.gz
+gunzip snappy-%SNAPPY_VERSION%.tar.gz
+tar xf snappy-%SNAPPY_VERSION%.tar
+del snappy-%SNAPPY_VERSION%.tar
 
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
 gunzip curl-%CURL_VERSION%.tar.gz

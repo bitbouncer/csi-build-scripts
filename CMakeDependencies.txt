@@ -1,20 +1,18 @@
 SET(OPENSSLPATH             ${CMAKE_SOURCE_DIR}/../openssl-1.0.1j)
+SET(SNAPPY_PATH             ${CMAKE_SOURCE_DIR}/../snappy-1.1.3)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
 SET(BOOST_PATH              ${CMAKE_SOURCE_DIR}/../boost_1_59_0)
-SET(BOOST_ENDIAN_PATH       ${CMAKE_SOURCE_DIR}/../endian)
+SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
 SET(LIBEVENTPATH            ${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
 SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-asio)
 
-
-# WE ARE CURRENTLY USING A BRANCH IO AVRO CPPSET
+# WE ARE CURRENTLY USING A BRANCH OF AVRO CPP (snappy compression and less warnings)
 # SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
 SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro/lang/c++) 
-
 SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
 
 if(WIN32)
-# WE ARE USING A BRANCH IF C_ARES_PATH since it does not compike with vs2013
-# SET(C_ARES_PATH           ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)
+# SET(C_ARES_PATH           ${CMAKE_SOURCE_DIR}/../c-ares-1.10.0)  release does not compile with vs2013 (trunk does)
 SET(C_ARES_PATH             ${CMAKE_SOURCE_DIR}/../c-ares)
 endif()
 
@@ -35,11 +33,12 @@ endif()
 
 include_directories(
 	${CMAKE_SOURCE_DIR} 
+	${ZLIB_PATH}
+    ${SNAPPY_PATH}
+    ${AVROCPP_PATH}    
 	${BOOST_PATH} 
-	${BOOST_ENDIAN_PATH}/include 
     ${AEROSPIKE_ASIO_PATH}
     ${LIBEVENTPATH}/include
-    ${AVROCPP_PATH}
     ${CSI_HTTP_PATH}
     ${CSI_AVRO_UTILS_PATH}
     ${CSI_KAFKA_PATH}
@@ -49,7 +48,7 @@ include_directories(
     ${POSTGRES_ASIO_PATH}
     ${LIBCURL_PATH}/include
     ${PTHREADPATH}
-	${ZLIB_PATH}    
+
 )
 
 if(WIN32)
@@ -206,7 +205,7 @@ endif()
 
 
 if(WIN32)
-set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro libcurl libeay32 ssleay32 Ws2_32 ZLIB) 
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro csi-snappy libcurl libeay32 ssleay32 Ws2_32 ZLIB) 
 set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
 endif()
 
