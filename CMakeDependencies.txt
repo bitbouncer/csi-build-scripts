@@ -211,7 +211,7 @@ endif()
 
 if(__LINUX__)
 if(LSB_DISTRIBUTOR_ID STREQUAL "centos")
-set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares ldap ssl crypto rt pthread z c)
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares idn ldap lber ssl crypto rt pthread z c)
 else()
 set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_program_options boost_filesystem boost_regex boost_chrono boost_iostreams curl cares idn ldap lber ssl crypto rt pthread z rtmp c)
 endif()
