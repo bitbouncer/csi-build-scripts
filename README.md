@@ -45,6 +45,8 @@ mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/linux_setup_3rd_part.sh
+(run this part first - it will stop after a sudo)
+
 bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/linux_rebuild_csi.sh
 ```
@@ -65,6 +67,8 @@ mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/linux_setup_3rd_part.sh
+(run this part first - it will stop after a sudo)
+
 bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/linux_rebuild_csi.sh
 ```
