@@ -8,4 +8,8 @@ git clone https://github.com/bitbouncer/csi-avro-utils
 git clone https://github.com/bitbouncer/csi-kafka
 git clone https://github.com/bitbouncer/json-spirit
 git clone https://github.com/bitbouncer/csi-samples
+git clone https://github.com/bitbouncer/kafka2influx
+git clone https://github.com/bitbouncer/phoebe
+
+
 

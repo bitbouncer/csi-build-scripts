@@ -43,3 +43,13 @@ cd csi-samples
 git pull
 bash -e build_linux.sh
 cd ..
+
+cd phoebe
+git pull
+bash -e build_linux.sh
+cd ..
+
+cd kafka2influx
+git pull
+bash -e build_linux.sh
+cd ..
