@@ -96,6 +96,7 @@ link_directories(
     ${BOOST_PATH}/stage/lib
     ${LIBCURL_PATH}/lib/.libs
     ${C_ARES_PATH}/.libs
+	${SNAPPY_PATH}/.libs	
     ${OPENSSLPATH}
     ${CSI_HTTP_PATH}/lib
     ${CSI_AVRO_UTILS_PATH}/lib
