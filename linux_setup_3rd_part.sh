@@ -57,7 +57,7 @@ echo done building curl
 cd ..
 
 #build stuff
-cd snappy
+cd snappy-$SNAPPY_VERSION
 ./autogen.sh
 ./configure
 make all

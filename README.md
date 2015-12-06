@@ -6,17 +6,16 @@ Downloads and build all required libs. The purpose is to have a common build sys
 
 Downloads and builds (where needed)
   * cares              1.10.0 
-  * libcurl            7.0.39 
+  * libcurl            7.0.42 
   * joyent_http_parser 2.3 
   * boost              1.59
+  * snappy             1.1.3
   * avro_cpp           1.7.7
   * openSSL            1.0.1j (windows)
   * zlib               1.2.8  (windows)
   * libevent           2.0.21 (windows)
   * pthread            2.9.1  (windows)
-  * snappy             (master)
- 
-
+  
 ## Windows x64 - Visual Studio 12
 
 Get and build nessessary dependencies
@@ -46,6 +45,8 @@ mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/linux_setup_3rd_part.sh
+(run this part first - it will stop after a sudo)
+
 bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/linux_rebuild_csi.sh
 ```
@@ -57,15 +58,17 @@ Install build tools (as root)
 ```
 yum -y update
 yum -y groupinstall 'Development Tools'
-yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel bzip2-devel
+yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel bzip2-devel openldap  openldap-clients openldap-devel libidn-devel
 ```
 
-Get and build necessary dependencies (as root)
+Get and build necessary dependencies
 ```
 mkdir source
 cd source
 git clone https://github.com/bitbouncer/csi-build-scripts.git
 bash csi-build-scripts/linux_setup_3rd_part.sh
+(run this part first - it will stop after a sudo)
+
 bash csi-build-scripts/linux_get_csi.sh
 bash csi-build-scripts/linux_rebuild_csi.sh
 ```
