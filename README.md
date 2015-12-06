@@ -58,10 +58,10 @@ Install build tools (as root)
 ```
 yum -y update
 yum -y groupinstall 'Development Tools'
-yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel bzip2-devel libidn-devel
+yum -y install automake autogen libtool git wget cmake unzip openssl redhat-lsb-core postgresql-devel openssl-devel bzip2-devel openldap  openldap-clients openldap-devel libidn-devel
 ```
 
-Get and build necessary dependencies (as root)
+Get and build necessary dependencies
 ```
 mkdir source
 cd source
