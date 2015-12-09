@@ -20,8 +20,8 @@ REM set AVRO_VERSION=1.7.7
 REM set AVRO_DIR=avro-cpp-%AVRO_VERSION%
 set AVRO_DIR=avro\lang\c++ 
 
-set LIBEVENT_VERSION=2.0.21
-set PTHREAD_VERSION=2-9-1
+REM set LIBEVENT_VERSION=2.0.21
+REM set PTHREAD_VERSION=2-9-1
 set JOYENT_HTTP_VERSION=2.3
 
 
@@ -62,10 +62,10 @@ gunzip http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar xf http_parser-v%JOYENT_HTTP_VERSION%.tar
 del http_parser-v%JOYENT_HTTP_VERSION%.tar
 
-wget --no-check-certificate https://github.com/libevent/libevent/archive/release-%LIBEVENT_VERSION%-stable.tar.gz -Olibevent-%LIBEVENT_VERSION%-stable.tar.gz
-gunzip libevent-%LIBEVENT_VERSION%-stable.tar.gz
-tar xf libevent-%LIBEVENT_VERSION%-stable.tar
-del libevent-%LIBEVENT_VERSION%-stable.tar
+REM wget --no-check-certificate https://github.com/libevent/libevent/archive/release-%LIBEVENT_VERSION%-stable.tar.gz -Olibevent-%LIBEVENT_VERSION%-stable.tar.gz
+REM gunzip libevent-%LIBEVENT_VERSION%-stable.tar.gz
+REM tar xf libevent-%LIBEVENT_VERSION%-stable.tar
+REM del libevent-%LIBEVENT_VERSION%-stable.tar
 
 wget  http://www.openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
 gunzip %OPEN_SSL_VERSION%.tar.gz
@@ -73,10 +73,10 @@ tar xf %OPEN_SSL_VERSION%.tar
 del %OPEN_SSL_VERSION%.tar
 rmdir /s /q %OPEN_SSL_VERSION%\include
 
-wget ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
-gunzip pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
-tar xf pthreads-w32-%PTHREAD_VERSION%-release.tar
-del pthreads-w32-%PTHREAD_VERSION%-release.tar
+REM wget ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
+REM gunzip pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
+REM tar xf pthreads-w32-%PTHREAD_VERSION%-release.tar
+REM del pthreads-w32-%PTHREAD_VERSION%-release.tar
 
 wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz
 gunzip zlib-%ZLIB_VERSION%.tar.gz
@@ -165,14 +165,14 @@ cd zlib-%ZLIB_VERSION%
 nmake -f win32/Makefile.msc
 cd ..
 
-@ECHO BUILDING PTHREADS
-cd pthreads-w32-%PTHREAD_VERSION%-release
-#nmake clean VC-static-debug
-#nmake clean VC-static
-#test
-nmake clean VC
-nmake clean VC-debug
-cd ..
+REM @ECHO BUILDING PTHREADS
+REM cd pthreads-w32-%PTHREAD_VERSION%-release
+REM #nmake clean VC-static-debug
+REM #nmake clean VC-static
+REM #test
+REM nmake clean VC
+REM nmake clean VC-debug
+REM cd ..
 
 @ECHO BUILDING BOOST
 cd boost_%BOOST_VERSION%

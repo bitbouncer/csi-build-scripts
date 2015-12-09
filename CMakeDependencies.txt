@@ -3,8 +3,8 @@ SET(SNAPPY_PATH             ${CMAKE_SOURCE_DIR}/../snappy-1.1.3)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
 SET(BOOST_PATH              ${CMAKE_SOURCE_DIR}/../boost_1_59_0)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
-SET(LIBEVENTPATH            ${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
-SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-asio)
+#SET(LIBEVENTPATH            ${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
+#SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-asio)
 
 # WE ARE CURRENTLY USING A BRANCH OF AVRO CPP (snappy compression and less warnings)
 # SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
@@ -27,9 +27,9 @@ SET(CSI_HTTP_PATH           ${CMAKE_SOURCE_DIR}/../csi-http)
 SET(CSI_AVRO_UTILS_PATH     ${CMAKE_SOURCE_DIR}/../csi-avro-utils)
 SET(CSI_KAFKA_PATH          ${CMAKE_SOURCE_DIR}/../csi-kafka)
 
-if(WIN32)
-SET(PTHREADPATH	    	    ${CMAKE_SOURCE_DIR}/../pthreads-w32-2-9-1-release)
-endif()
+#if(WIN32)
+#SET(PTHREADPATH	    	    ${CMAKE_SOURCE_DIR}/../pthreads-w32-2-9-1-release)
+#endif()
 
 include_directories(
 	${CMAKE_SOURCE_DIR} 
@@ -37,8 +37,8 @@ include_directories(
     ${SNAPPY_PATH}
     ${AVROCPP_PATH}    
 	${BOOST_PATH} 
-    ${AEROSPIKE_ASIO_PATH}
-    ${LIBEVENTPATH}/include
+ #   ${AEROSPIKE_ASIO_PATH}
+ #   ${LIBEVENTPATH}/include
     ${CSI_HTTP_PATH}
     ${CSI_AVRO_UTILS_PATH}
     ${CSI_KAFKA_PATH}
@@ -47,14 +47,14 @@ include_directories(
     ${C_ARES_PATH}
     ${POSTGRES_ASIO_PATH}
     ${LIBCURL_PATH}/include
-    ${PTHREADPATH}
+ #   ${PTHREADPATH}
 
 )
 
 if(WIN32)
 include_directories(
     ${OPENSSLPATH}/inc32
-    ${LIBEVENTPATH}/WIN32-Code
+#    ${LIBEVENTPATH}/WIN32-Code
 )
 
 link_directories(
@@ -63,14 +63,14 @@ link_directories(
     ${BOOST_PATH}/lib/$(Platform)/lib
     ${LIBCURL_PATH}/libs/$(Platform)/$(Configuration)
 	${C_ARES_PATH}/libs/$(Platform)/$(Configuration)
-    ${LIBEVENTPATH}
-    ${PTHREADPATH}
+#    ${LIBEVENTPATH}
+#    ${PTHREADPATH}
     ${JSON_SPIRIT_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_HTTP_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_AVRO_UTILS_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_KAFKA_PATH}/lib/$(Platform)/$(Configuration)
     ${POSTGRES_ASIO_PATH}/lib/$(Platform)/$(Configuration)
-    ${AEROSPIKE_ASIO_PATH}/lib/$(Platform)    
+#    ${AEROSPIKE_ASIO_PATH}/lib/$(Platform)    
 )
 
 add_definitions(-DCURL_STATICLIB)
@@ -104,7 +104,7 @@ link_directories(
     ${CSI_KAFKA_PATH}/lib
     ${JSON_SPIRIT_PATH}/lib
     ${POSTGRES_ASIO_PATH}/lib
-    ${AEROSPIKE_ASIO_PATH}/lib    
+ #   ${AEROSPIKE_ASIO_PATH}/lib    
 )
 
 if (USE_BUILTIN_CURL)
@@ -144,7 +144,7 @@ link_directories(
     ${CMAKE_SOURCE_DIR}/lib
     ${BOOST_PATH}/stage/lib
     ${OPENSSLPATH}
-    ${AEROSPIKE_ASIO_PATH}/lib
+ #   ${AEROSPIKE_ASIO_PATH}/lib
     ${CSI_HTTP_PATH}/lib
     ${CSI_AVRO_UTILS_PATH}/lib
     ${CSI_KAFKA_PATH}/lib
@@ -228,7 +228,7 @@ endif()
 
 #most likely wrong since I don't have a mac anymore...
 if(__DARWIN__)
-set(EXT_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_filesystem boost_locale LIBCURL crypto ssl stdc++ pthread c)
+set(CSI_HTTP_LIBS csi-http csi-http-parser csi-avro boost_log_setup boost_log boost_date_time boost_timer boost_thread boost_system boost_filesystem boost_locale LIBCURL crypto ssl stdc++ pthread c)
 set(CSI_KAFKA_LIBS csi-kafka csi-avro-utils json_spirit ${CSI_HTTP_LIBS})
 endif()
 

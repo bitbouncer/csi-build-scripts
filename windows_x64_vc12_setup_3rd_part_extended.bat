@@ -6,8 +6,35 @@ set PROTOBUF_VERSION=3.0.0-beta-1
 set LIBXML2_VER=2.9.3
 SET KERBEROS5_VER=1.14
 SET LIBICONV_VER=1.14
+set LIBEVENT_VERSION=2.0.21
+set PTHREAD_VERSION=2-9-1
+
+
 
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
+
+wget --no-check-certificate https://github.com/libevent/libevent/archive/release-%LIBEVENT_VERSION%-stable.tar.gz -Olibevent-%LIBEVENT_VERSION%-stable.tar.gz
+gunzip libevent-%LIBEVENT_VERSION%-stable.tar.gz
+tar xf libevent-%LIBEVENT_VERSION%-stable.tar
+del libevent-%LIBEVENT_VERSION%-stable.tar
+
+REM building this is done in aerospike-asio in cmake project....
+
+
+wget ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
+gunzip pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
+tar xf pthreads-w32-%PTHREAD_VERSION%-release.tar
+del pthreads-w32-%PTHREAD_VERSION%-release.tar
+
+@ECHO BUILDING PTHREADS
+cd pthreads-w32-%PTHREAD_VERSION%-release
+#nmake clean VC-static-debug
+#nmake clean VC-static
+#test
+nmake clean VC
+nmake clean VC-debug
+cd ..
+
 
 wget --no-check-certificate https://github.com/google/protobuf/releases/download/v%PROTOBUF_VERSION%/protobuf-cpp-%PROTOBUF_VERSION%.tar.gz -Oprotobuf-cpp-%PROTOBUF_VERSION%.tar.gz 
 gunzip protobuf-cpp-%PROTOBUF_VERSION%.tar.gz 
