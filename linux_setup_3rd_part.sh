@@ -37,7 +37,8 @@ rm -f boost_$BOOST_VERSION.tar.gz
 
 cd boost_$BOOST_VERSION
 ./bootstrap.sh
-./b2 -j 4 b2 link=static --with-boost_log_setup --with-boost_log --with-boost_date_time --with-boost_timer --with-boost_thread --with-boost_system --with-boost_program_options --with-boost_filesystem --with-boost_regex --with-boost_chrono --with-boost_iostreams  
+./b2 -j 4 link=static 
+
 cd ..
 
 export CFLAGS='-O2'
