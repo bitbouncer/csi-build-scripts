@@ -8,8 +8,8 @@ SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
 
 # WE ARE CURRENTLY USING A BRANCH OF AVRO CPP (snappy compression and less warnings)
 #SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
-#SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro/lang/c++) 
-SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro-src-1.8.0/lang/c++) 
+SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro/lang/c++) 
+#SET(AVROCPP_PATH            ${CMAKE_SOURCE_DIR}/../avro-src-1.8.0/lang/c++) 
 
 SET(HTTP_PARSER_PATH        ${CMAKE_SOURCE_DIR}/../http-parser-2.3)
 
