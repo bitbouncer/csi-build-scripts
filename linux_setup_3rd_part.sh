@@ -23,6 +23,10 @@ rm -f snappy-$SNAPPY_VERSION.tar.gz
 #tar xvf avro-cpp-$AVRO_VERSION.tar.gz
 #rm avro-cpp-$AVRO_VERSION.tar.gz
 
+git clone https://github.com/bitbouncer/avro.git
+mkdir avro\lang\c++\avro
+xcopy /s /y avro\lang\c++\api\* avro\lang\c++\avro
+
 wget --no-check-certificate  https://github.com/joyent/http-parser/archive/v$JOYENT_HTTP_VERSION.tar.gz -Ohttp_parser-v$JOYENT_HTTP_VERSION.tar.gz
 tar -xvf http_parser-v$JOYENT_HTTP_VERSION.tar.gz
 rm -f http_parser-v$JOYENT_HTTP_VERSION.tar.gz
