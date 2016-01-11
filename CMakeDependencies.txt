@@ -3,8 +3,6 @@ SET(SNAPPY_PATH             ${CMAKE_SOURCE_DIR}/../snappy-1.1.3)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
 SET(BOOST_PATH              ${CMAKE_SOURCE_DIR}/../boost_1_59_0)
 SET(ZLIB_PATH               ${CMAKE_SOURCE_DIR}/../zlib-1.2.8)
-#SET(LIBEVENTPATH            ${CMAKE_SOURCE_DIR}/../libevent-release-2.0.21-stable)
-#SET(AEROSPIKE_ASIO_PATH     ${CMAKE_SOURCE_DIR}/../aerospike-asio)
 
 # WE ARE CURRENTLY USING A BRANCH OF AVRO CPP (snappy compression and less warnings)
 #SET(AVROCPP_PATH          ${CMAKE_SOURCE_DIR}/../avro-cpp-1.7.7)
@@ -29,18 +27,12 @@ SET(CSI_HTTP_PATH           ${CMAKE_SOURCE_DIR}/../csi-http)
 SET(CSI_AVRO_UTILS_PATH     ${CMAKE_SOURCE_DIR}/../csi-avro-utils)
 SET(CSI_KAFKA_PATH          ${CMAKE_SOURCE_DIR}/../csi-kafka)
 
-#if(WIN32)
-#SET(PTHREADPATH	    	    ${CMAKE_SOURCE_DIR}/../pthreads-w32-2-9-1-release)
-#endif()
-
 include_directories(
 	${CMAKE_SOURCE_DIR} 
 	${ZLIB_PATH}
     ${SNAPPY_PATH}
     ${AVROCPP_PATH}    
 	${BOOST_PATH} 
- #   ${AEROSPIKE_ASIO_PATH}
- #   ${LIBEVENTPATH}/include
     ${CSI_HTTP_PATH}
     ${CSI_AVRO_UTILS_PATH}
     ${CSI_KAFKA_PATH}
@@ -49,14 +41,12 @@ include_directories(
     ${C_ARES_PATH}
     ${POSTGRES_ASIO_PATH}
     ${LIBCURL_PATH}/include
- #   ${PTHREADPATH}
-
+ 
 )
 
 if(WIN32)
 include_directories(
     ${OPENSSLPATH}/inc32
-#    ${LIBEVENTPATH}/WIN32-Code
 )
 
 link_directories(
@@ -65,14 +55,11 @@ link_directories(
     ${BOOST_PATH}/lib/$(Platform)/lib
     ${LIBCURL_PATH}/libs/$(Platform)/$(Configuration)
 	${C_ARES_PATH}/libs/$(Platform)/$(Configuration)
-#    ${LIBEVENTPATH}
-#    ${PTHREADPATH}
     ${JSON_SPIRIT_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_HTTP_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_AVRO_UTILS_PATH}/lib/$(Platform)/$(Configuration)
     ${CSI_KAFKA_PATH}/lib/$(Platform)/$(Configuration)
     ${POSTGRES_ASIO_PATH}/lib/$(Platform)/$(Configuration)
-#    ${AEROSPIKE_ASIO_PATH}/lib/$(Platform)    
 )
 
 add_definitions(-DCURL_STATICLIB)
@@ -106,7 +93,6 @@ link_directories(
     ${CSI_KAFKA_PATH}/lib
     ${JSON_SPIRIT_PATH}/lib
     ${POSTGRES_ASIO_PATH}/lib
- #   ${AEROSPIKE_ASIO_PATH}/lib    
 )
 
 if (USE_BUILTIN_CURL)
@@ -146,7 +132,6 @@ link_directories(
     ${CMAKE_SOURCE_DIR}/lib
     ${BOOST_PATH}/stage/lib
     ${OPENSSLPATH}
- #   ${AEROSPIKE_ASIO_PATH}/lib
     ${CSI_HTTP_PATH}/lib
     ${CSI_AVRO_UTILS_PATH}/lib
     ${CSI_KAFKA_PATH}/lib
@@ -159,6 +144,7 @@ endif() #END DARWIN
 #COMMON DEFINITIONS
 add_definitions(-D_FILE_OFFSET_BITS=64 -D_REENTRANT -DEXTERNAL_LOCKS -DMULTITHREAD)
 add_definitions(-DBOOST_ASIO_HAS_STD_CHRONO)
+add_definitions(-DBOOST_ALL_STATIC_LINK)
 
 if(WIN32)
 add_definitions(-DMARCH_x86_64) 
@@ -188,7 +174,6 @@ add_definitions(-fPIC)
 #if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.8.0")
 add_definitions(-std=c++11)
 #endif()
-#add_definitions(-DBOOST_LOG_DYN_LINK)
 add_definitions(-DBOOST_LOG_USE_NATIVE_SYSLOG)
 add_definitions(-Wno-deprecated)
 endif()
@@ -202,7 +187,6 @@ add_definitions(-DCURL_STATICLIB)
 add_definitions(-D__DARWIN__)
 add_definitions(-fPIC)
 add_definitions(-std=c++11)
-#add_definitions(-DBOOST_LOG_DYN_LINK)
 include_directories(/opt/X11/include)
 link_directories(${BOOST_PATH}/stage/lib ${CMAKE_SOURCE_DIR}/lib ${CURL_LIB_PATH} ${JSON_SPIRIT_LIB_PATH})
 endif()
