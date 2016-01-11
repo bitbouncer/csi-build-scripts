@@ -10,20 +10,13 @@ set OPEN_SSL_VERSION=openssl-1.0.1j
 REM set C_ARES_VERSION=1.10.0
 REM set CARES_DIR=c-ares-%C_ARES_VERSION%
 set CARES_DIR=c-ares-master
-
-
 set CURL_VERSION=7.42.1
 set ZLIB_VERSION=1.2.8
 set SNAPPY_VERSION=1.1.3
-
 REM set AVRO_VERSION=1.7.7
 REM set AVRO_DIR=avro-cpp-%AVRO_VERSION%
 set AVRO_DIR=avro\lang\c++ 
-
-REM set LIBEVENT_VERSION=2.0.21
-REM set PTHREAD_VERSION=2-9-1
 set JOYENT_HTTP_VERSION=2.3
-
 
 call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 
@@ -34,7 +27,7 @@ REM until avro changes gets merged
 
 
 wget http://sourceforge.net/projects/boost/files/boost/%BOOST_VERSION_DOTTED%/boost_%BOOST_VERSION%.tar.gz/download -Oboost_%BOOST_VERSION%.tar.gz
-gunzip boost_%BOOST_VERSION%.tar.gz
+gzip -d boost_%BOOST_VERSION%.tar.gz
 tar xf boost_%BOOST_VERSION%.tar
 del boost_%BOOST_VERSION%.tar
 
@@ -48,38 +41,28 @@ unzip c-ares.zip
 del c-ares.zip
 
 wget --no-check-certificate https://github.com/google/snappy/releases/download/%SNAPPY_VERSION%/snappy-%SNAPPY_VERSION%.tar.gz  -Osnappy-%SNAPPY_VERSION%.tar.gz
-gunzip snappy-%SNAPPY_VERSION%.tar.gz
+gzip -d snappy-%SNAPPY_VERSION%.tar.gz
 tar xf snappy-%SNAPPY_VERSION%.tar
 del snappy-%SNAPPY_VERSION%.tar
 
 wget http://curl.haxx.se/download/curl-%CURL_VERSION%.tar.gz
-gunzip curl-%CURL_VERSION%.tar.gz
+gzip -d curl-%CURL_VERSION%.tar.gz
 tar xf curl-%CURL_VERSION%.tar
 del curl-%CURL_VERSION%.tar
 
 wget --no-check-certificate https://github.com/joyent/http-parser/archive/v%JOYENT_HTTP_VERSION%.tar.gz -Ohttp_parser-v%JOYENT_HTTP_VERSION%.tar.gz
-gunzip http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
+gzip -d http_parser-v%JOYENT_HTTP_VERSION%.tar.gz
 tar xf http_parser-v%JOYENT_HTTP_VERSION%.tar
 del http_parser-v%JOYENT_HTTP_VERSION%.tar
 
-REM wget --no-check-certificate https://github.com/libevent/libevent/archive/release-%LIBEVENT_VERSION%-stable.tar.gz -Olibevent-%LIBEVENT_VERSION%-stable.tar.gz
-REM gunzip libevent-%LIBEVENT_VERSION%-stable.tar.gz
-REM tar xf libevent-%LIBEVENT_VERSION%-stable.tar
-REM del libevent-%LIBEVENT_VERSION%-stable.tar
-
 wget  http://www.openssl.org/source/%OPEN_SSL_VERSION%.tar.gz 
-gunzip %OPEN_SSL_VERSION%.tar.gz
+gzip -d %OPEN_SSL_VERSION%.tar.gz
 tar xf %OPEN_SSL_VERSION%.tar
 del %OPEN_SSL_VERSION%.tar
 rmdir /s /q %OPEN_SSL_VERSION%\include
 
-REM wget ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
-REM gunzip pthreads-w32-%PTHREAD_VERSION%-release.tar.gz
-REM tar xf pthreads-w32-%PTHREAD_VERSION%-release.tar
-REM del pthreads-w32-%PTHREAD_VERSION%-release.tar
-
 wget http://zlib.net/zlib-%ZLIB_VERSION%.tar.gz
-gunzip zlib-%ZLIB_VERSION%.tar.gz
+gzip -d zlib-%ZLIB_VERSION%.tar.gz
 tar xf zlib-%ZLIB_VERSION%.tar
 del zlib-%ZLIB_VERSION%.tar
 
@@ -159,28 +142,16 @@ copy builds\libcurl-vc%VISUALSTUDIO_VERSION_MAJOR%-x64-release-static-ssl-static
 cd ..
 @ECHO DONE WITH CURL
 
-
 @ECHO BUILDING ZLIB
 cd zlib-%ZLIB_VERSION%
 nmake -f win32/Makefile.msc
 cd ..
 
-REM @ECHO BUILDING PTHREADS
-REM cd pthreads-w32-%PTHREAD_VERSION%-release
-REM #nmake clean VC-static-debug
-REM #nmake clean VC-static
-REM #test
-REM nmake clean VC
-REM nmake clean VC-debug
-REM cd ..
-
 @ECHO BUILDING BOOST
 cd boost_%BOOST_VERSION%
 rmdir /s /q bin.v2
-REM call "C:\Program Files (x86)\Microsoft Visual Studio %VISUALSTUDIO_VERSION%\VC\vcvarsall.bat" amd64
 call bootstrap.bat
-#b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete --stagedir=lib\x64 stage -s ZLIB_INCLUDE=%CD%\..\zlib-%ZLIB_VERSION% -s ZLIB_LIBPATH=%CD%\..\zlib-%ZLIB_VERSION%
-b2 -j 8 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
+b2 -j 4 -toolset=msvc-%VISUALSTUDIO_VERSION% address-model=64 --build-type=complete link=static --stagedir=lib\x64 stage -s ZLIB_SOURCE=%CD%\..\zlib-%ZLIB_VERSION%
 rmdir /s /q bin.v2
 cd ..
 
